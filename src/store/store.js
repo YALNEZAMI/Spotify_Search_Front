@@ -4,6 +4,9 @@ export const store = createStore({
   state() {
     return {
       accessToken: "",
+      chansons: [],
+      artistes: [],
+      albums: [],
     };
   },
   mutations: {

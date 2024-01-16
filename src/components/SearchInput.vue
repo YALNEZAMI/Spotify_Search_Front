@@ -3,7 +3,7 @@
     <input
       v-model="searchInput"
       type="text"
-      class="rounded p-2 border-2 w-3/4"
+      class="rounded p-2 border-2 border-white w-full bg-gray-700"
       placeholder="Baby shark..."
     />
   </main>

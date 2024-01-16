@@ -1,17 +1,18 @@
 <template>
-  <main>
-    <div class="flex justify-center rounded mt-3">
+  <main class="bg-black min-h-screen">
+    <div class="text-center flex flex-row justify-end">
+      <SearchInput @search="search" class="w-3/4" />
       <div
-        class="rounded"
-        :style="{
-          backgroundImage: 'url(/spotLogo.jpg)',
-          backgroundPosition: 'center',
-          minHeight: '200px',
-          width: '50%',
-        }"
-      ></div>
+        class="profile flex flex-col justify-center rounded h-11 p-1 bg-white ml-3"
+      >
+        <img
+          class="w-20 h-5"
+          src="../../public/Spotify_Logo_CMYK_Black.png"
+          alt=""
+        />
+        <span>Yaser</span>
+      </div>
     </div>
-    <div class="text-center mt-3"><SearchInput @search="search" /></div>
     <div class="flex flex-row justify-center space-x-20 mt-3 border-2 py-1">
       <div
         v-for="choise in choises"
@@ -55,15 +56,19 @@
 </template>
 <style scoped></style>
 <script setup>
+//import section
 import SearchInput from "../components/SearchInput.vue";
 import ChansonElement from "../components/Chanson.vue";
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-const router = useRouter();
-
 import AlbumElement from "../components/Album.vue";
 import ArtistElement from "../components/Artist.vue";
+//init a router
+const router = useRouter();
+//init a store
+const store = useStore();
+
 const searchChoise = ref("chansons");
 const choises = ref([
   { name: "chansons", bg: "green" },
@@ -74,7 +79,6 @@ let searchKey = "";
 const chansons = ref([]);
 const albums = ref([]);
 const artists = ref([]);
-const store = useStore();
 onMounted(async () => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
