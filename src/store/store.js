@@ -13,6 +13,7 @@ export const store = createStore({
       myPlaylists: [],
       artists: [],
       searchedArtists: [],
+      searchedPlaylists: [],
       albums: [],
       searchedAlbums: [],
     };
@@ -55,6 +56,9 @@ export const store = createStore({
     setSearchedAlbums(state, albums) {
       state.searchedAlbums = albums;
     },
+    setSearchedPlaylists(state, playlists) {
+      state.searchedPlaylists = playlists;
+    },
     setMyChansons(state, chansons) {
       state.myChansons = chansons;
     },
@@ -79,31 +83,10 @@ export const store = createStore({
       });
 
       const { access_token } = await result.json();
-      console.log(access_token);
       commit("setAccessToken", access_token);
       return access_token;
     },
-    // async getRefreshToken({ state, commit }) {
-    //   // refresh token that has been previously stored
-    //   const refreshToken = localStorage.getItem("refresh_token");
-    //   const url = "https://accounts.spotify.com/api/token";
 
-    //   const payload = {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //     },
-    //     body: new URLSearchParams({
-    //       grant_type: "refresh_token",
-    //       refresh_token: state.accessToken,
-    //       client_id: clientId,
-    //     }),
-    //   };
-    //   const body = await axios.post(url, payload);
-
-    //   // localStorage.setItem("access_token", response.accessToken);
-    //   // localStorage.setItem("refresh_token", response.refreshToken);
-    // },
     //get profile from spotify api
     async getProfile({ state, commit }) {
       const result = await axios.get("https://api.spotify.com/v1/me", {
@@ -114,7 +97,6 @@ export const store = createStore({
     },
     //
     async searchSongs({ commit, state }, key) {
-      console.log(key);
       const res = await axios.get(
         `https://api.spotify.com/v1/search?q=${key}&type=track&limit=50`,
         {
@@ -173,6 +155,22 @@ export const store = createStore({
       commit("setArtists", items);
       return items;
     },
+    async getDefaultPlaylists({ commit, state }) {
+      let letters = "abcdefghijklmnopqrstuvwxyz";
+      let key = letters[Math.floor(Math.random() * letters.length)];
+      const res = await axios.get(
+        `https://api.spotify.com/v1/search?q=${key}&type=playlist`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+          },
+        }
+      );
+
+      const items = res.data.playlists.items;
+      commit("setSearchedPlaylists", items);
+      return items;
+    },
     async searchAlbums({ commit, state }, key) {
       const res = await axios.get(
         `https://api.spotify.com/v1/search?q=${key}&type=album&limit=50`,
@@ -203,23 +201,8 @@ export const store = createStore({
       commit("setAlbums", items);
       return items;
     },
-    // async getMyChansons({ commit, state }) {
-    //   console.log("getMyChansons");
-    //   const res = await axios.get(
-    //     `https://api.spotify.com/v1/me/following?type=artist`,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${state.accessToken}`,
-    //       },
-    //     }
-    //   );
-    //   const items = res.data.albums.items;
 
-    //   commit("setMyChansons", items);
-    //   return items;
-    // },
     async getMyPlaylists({ commit, state }) {
-      console.log("getMyPlaylists");
       const res = await axios.get(`https://api.spotify.com/v1/me/playlists`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
@@ -228,6 +211,19 @@ export const store = createStore({
       const items = res.data.items;
 
       commit("setMyPlaylists", items);
+      return items;
+    },
+    async searchPlaylists({ commit, state }, key) {
+      const res = await axios.get(
+        `https://api.spotify.com/v1/search?q=${key}&type=playlist`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+          },
+        }
+      );
+      const items = res.data.playlists.items;
+      commit("setSearchedPlaylists", items);
       return items;
     },
     //recuperer mes chansons

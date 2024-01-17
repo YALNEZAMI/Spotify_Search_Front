@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-32 h-48 m-2 cursor-pointer p-1 relative rounded"
+    class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-28 max-w-32 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
     <div @click="goTo" class="flex justify-center">
       <img
@@ -8,9 +8,10 @@
           width: '100%',
           height: '100%',
         }"
-        class="rounded-full max-w-28 max-h-28"
+        class="rounded-full max-w-28 max-h-28 text-white"
         :src="artist.images[0].url"
-        alt=""
+        onerror="this.src='/default_artist.jpg'"
+        alt="img"
       />
     </div>
     <div @click="goTo" class="text-center font-bold h-7 my-1 truncate">
@@ -50,8 +51,8 @@ const goTo = () => {
 };
 const getName = () => {
   let name = artist.name;
-  if (name.length > 10) {
-    return name.substring(0, 10) + "...";
+  if (name.length > 16) {
+    return name.substring(0, 13) + "...";
   } else {
     return name;
   }

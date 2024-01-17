@@ -59,6 +59,14 @@
             :key="artist.id"
             :artist="artist"
           />
+          <!--playlists component-->
+          <PlayListElement
+            v-show="selectedItem == 'Playlists' || selectedItem == 'Tout'"
+            class=""
+            v-for="playlist in store.state.searchedPlaylists"
+            :key="playlist.id"
+            :playlist="playlist"
+          />
         </div>
       </div>
     </div>
@@ -70,6 +78,7 @@ import SearchInputElement from "../components/SearchInput.vue";
 import AlbumElement from "../components/Album.vue";
 import ArtistElement from "../components/Artist.vue";
 import ChansonElement from "../components/Chanson.vue";
+import PlayListElement from "../components/PlayList.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
@@ -81,6 +90,7 @@ let items = [
   { name: "Chansons" },
   { name: "Albums" },
   { name: "Artists" },
+  { name: "Playlists" },
 ];
 const selectedItem = ref(items[0].name);
 const search = async (searchInput) => {
@@ -92,12 +102,12 @@ const search = async (searchInput) => {
     await store.dispatch("searchAlbums", searchInput);
     await store.dispatch("searchSongs", searchInput);
     await store.dispatch("searchArtists", searchInput);
+    await store.dispatch("searchPlaylists", searchInput);
   } catch (error) {
     router.push("/login");
   }
 };
 const navigateTo = (path) => {
-  console.log(path);
   selectedItem.value = path;
 };
 // const shuffle = (tab) => {

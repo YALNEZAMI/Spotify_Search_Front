@@ -155,10 +155,5 @@ const logout = () => {
 };
 onMounted(async () => {
   await store.dispatch("getMyPlaylists");
-
-  // const getMySongs = await store.dispatch("getMySongs");
-  // console.log(getMySongs);
-  // const getMyLikedSongs = await store.dispatch("getMyLikedSongs");
-  // console.log(getMyLikedSongs);
 });
 </script>

@@ -1,9 +1,14 @@
 <template>
   <div
-    class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-28 h-48 m-2 cursor-pointer p-1 relative rounded"
+    class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-28 max-w-28 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
     <div @click="goTo">
-      <img class="w-28 h-30" :src="chanson.album.images[0].url" alt="" />
+      <img
+        class="w-28 h-30"
+        :src="chanson.album.images[0].url"
+        onerror="this.src='/default_music.jpg'"
+        alt="img"
+      />
     </div>
     <div @click="goTo" class="text-center font-bold h-7 my-1 truncate">
       {{ getChansonName() }}
@@ -45,15 +50,15 @@ const goToArtist = (url) => {
 //   return minutes + ":" + (seconds <script 10 ? "0" : "") + seconds;
 // };
 const getChansonName = () => {
-  if (chanson.name.length > 10) {
-    return chanson.name.substring(0, 10) + "...";
+  if (chanson.name.length > 16) {
+    return chanson.name.substring(0, 13) + "...";
   } else {
     return chanson.name;
   }
 };
 const getArtistName = () => {
-  if (chanson.artists[0].name.length > 7) {
-    return chanson.artists[0].name.substring(0, 7) + "...";
+  if (chanson.artists[0].name.length > 16) {
+    return chanson.artists[0].name.substring(0, 13) + "...";
   } else {
     return chanson.artists[0].name;
   }

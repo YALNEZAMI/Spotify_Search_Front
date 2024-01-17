@@ -1,9 +1,14 @@
 <template>
   <div
-    class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-32 h-48 m-2 cursor-pointer p-1 relative rounded"
+    class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-28 max-w-28 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
     <div @click="goTo">
-      <img class="w-32 h-28" :src="album.images[0].url" alt="" />
+      <img
+        class="w-32 h-28"
+        :src="album.images[0].url"
+        alt="album img"
+        onerror="this.src='/default_album.jpg'"
+      />
     </div>
     <div @click="goTo" class="text-center font-bold h-7 my-1 truncate">
       {{ getAlbumName() }}
@@ -45,16 +50,16 @@ const goToArtist = () => {
 };
 const getAlbumName = () => {
   let name = album.name;
-  if (name.length > 10) {
-    return name.substring(0, 10) + "...";
+  if (name.length > 16) {
+    return name.substring(0, 13) + "...";
   } else {
     return name;
   }
 };
 const getArtistName = () => {
   let name = album.artists[0].name;
-  if (name.length > 14) {
-    return name.substring(0, 14) + "...";
+  if (name.length > 16) {
+    return name.substring(0, 13) + "...";
   } else {
     return name;
   }
