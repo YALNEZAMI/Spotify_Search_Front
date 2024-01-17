@@ -61,7 +61,6 @@ export const store = createStore({
   actions: {
     async getAccessToken({ commit }, { clientId, code }) {
       const verifier = localStorage.getItem("verifier");
-
       const params = new URLSearchParams();
       params.append("client_id", clientId);
       params.append("grant_type", "authorization_code");
@@ -80,27 +79,28 @@ export const store = createStore({
       commit("setAccessToken", access_token);
       return access_token;
     },
-    async getRefreshToken({ state, commit }) {
-      // refresh token that has been previously stored
-      const refreshToken = localStorage.getItem("refresh_token");
-      const url = "https://accounts.spotify.com/api/token";
+    // async getRefreshToken({ state, commit }) {
+    //   // refresh token that has been previously stored
+    //   const refreshToken = localStorage.getItem("refresh_token");
+    //   const url = "https://accounts.spotify.com/api/token";
 
-      const payload = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          grant_type: "refresh_token",
-          refresh_token: state.accessToken,
-          client_id: clientId,
-        }),
-      };
-      const body = await axios.post(url, payload);
+    //   const payload = {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //     },
+    //     body: new URLSearchParams({
+    //       grant_type: "refresh_token",
+    //       refresh_token: state.accessToken,
+    //       client_id: clientId,
+    //     }),
+    //   };
+    //   const body = await axios.post(url, payload);
 
-      // localStorage.setItem("access_token", response.accessToken);
-      // localStorage.setItem("refresh_token", response.refreshToken);
-    },
+    //   // localStorage.setItem("access_token", response.accessToken);
+    //   // localStorage.setItem("refresh_token", response.refreshToken);
+    // },
+    //get profile from spotify api
     async getProfile({ state, commit }) {
       const result = await axios.get("https://api.spotify.com/v1/me", {
         headers: { Authorization: `Bearer ${state.accessToken}` },
@@ -108,7 +108,7 @@ export const store = createStore({
       commit("setProfile", result.data);
       return result.data;
     },
-
+    //
     async searchSongs({ commit, state }, key) {
       console.log(key);
       const res = await axios.get(
@@ -214,5 +214,17 @@ export const store = createStore({
     //   commit("setMyChansons", items);
     //   return items;
     // },
+    async getMyPlaylists({ commit, state }) {
+      console.log("getMyPlaylists");
+      const res = await axios.get(`https://api.spotify.com/v1/me/playlists`, {
+        headers: {
+          Authorization: `Bearer ${state.accessToken}`,
+        },
+      });
+      const items = res.data.items;
+
+      commit("setMyChansons", items);
+      return items;
+    },
   },
 });

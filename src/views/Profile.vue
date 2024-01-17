@@ -45,6 +45,7 @@
       >
         {{ store.state.profile.display_name }}
       </div>
+      <div>id: {{ store.state.profile.id }}</div>
       <div>Country: {{ store.state.profile.country }}</div>
       <div>Email: {{ store.state.profile.email }}</div>
       <div>Followers: {{ store.state.profile.followers.total }}</div>
@@ -76,6 +77,6 @@ const logout = () => {
   router.push("/login");
 };
 onMounted(async () => {
-  //   await store.dispatch("getMyChansons");
+  await store.dispatch("getMyPlaylists");
 });
 </script>

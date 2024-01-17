@@ -39,6 +39,9 @@ onMounted(async () => {
     store.commit("setAccessToken", accessToken);
     //on essaye de récupérer le profile, si erreur on catch(token invalide)
     await store.dispatch("getProfile");
+    await store.dispatch("getDefaultSongs");
+    await store.dispatch("getDefaultAlbums");
+    await store.dispatch("getDefaultArtists");
     //si le token est valide, on redirige vers la page home
     router.push("/home");
   } catch (error) {

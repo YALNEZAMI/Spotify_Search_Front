@@ -14,12 +14,12 @@
       :style="{
         marginRight: '20%',
       }"
-      class="nav text-white my-1 flex justify-center"
+      class="nav text-white mt-1 pl-5 flex flex-wrap justify-center"
     >
       <!--items de la barre de navigation-->
       <span
         @click="navigateTo(item.name)"
-        class="m-2 p-1 cursor-pointer px-2 bg-gray-800 border-2 rounded-3xl border-white"
+        class="m-1 my-2 p-1 cursor-pointer px-2 bg-gray-800 border-2 rounded-3xl border-white"
         v-for="item in items"
         :key="item.name"
         :class="{
@@ -40,21 +40,21 @@
         <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
           <!--chansons component-->
           <ChansonElement
-            v-show="selectedItem == 'Chansons'"
+            v-show="selectedItem == 'Chansons' || selectedItem == 'Tout'"
             v-for="chanson in store.state.searchedChansons"
             :key="chanson.id"
             :chanson="chanson"
           />
           <!--albums component-->
           <AlbumElement
-            v-show="selectedItem == 'Albums'"
+            v-show="selectedItem == 'Albums' || selectedItem == 'Tout'"
             v-for="album in store.state.searchedAlbums"
             :key="album.id"
             :album="album"
           />
           <!--artists component-->
           <ArtistElement
-            v-show="selectedItem == 'Artists'"
+            v-show="selectedItem == 'Artists' || selectedItem == 'Tout'"
             v-for="artist in store.state.searchedArtists"
             :key="artist.id"
             :artist="artist"
@@ -77,9 +77,10 @@ import { ref } from "vue";
 const store = useStore();
 const router = useRouter();
 let items = [
-  { name: "Chansons", path: "/chansons" },
-  { name: "Albums", path: "/albums" },
-  { name: "Artists", path: "/artists" },
+  { name: "Tout" },
+  { name: "Chansons" },
+  { name: "Albums" },
+  { name: "Artists" },
 ];
 const selectedItem = ref(items[0].name);
 const search = async (searchInput) => {
@@ -99,4 +100,8 @@ const navigateTo = (path) => {
   console.log(path);
   selectedItem.value = path;
 };
+// const shuffle = (tab) => {
+//   //on melange aleatoirement le tableau
+//   tab.sort(() => Math.random() - 0.5);
+// };
 </script>
