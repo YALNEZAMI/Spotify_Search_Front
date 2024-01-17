@@ -34,7 +34,7 @@
     >
       <PlayListElement
         class=""
-        v-for="playlist in store.state.myPlaylists"
+        v-for="playlist in playlistsTab"
         :key="playlist.id"
         :playlist="playlist"
       />
@@ -46,8 +46,17 @@
 //import section
 import PlayListElement from "../components/PlayList.vue";
 import { useStore } from "vuex";
+import { ref, onMounted } from "vue";
 const store = useStore();
-if (store.state.myPlaylists.length == 0) {
-  store.dispatch("getMyPlaylists");
-}
+//mettre mes playlists en avant
+let playlistsTab = ref([]);
+onMounted(async () => {
+  if (store.state.myPlaylists.length === 0) {
+    await store.dispatch("getMyPlaylists");
+    await store.dispatch("getDefaultPlaylists");
+  }
+  let myPlaylists = store.state.myPlaylists;
+  let searchedPlaylists = store.state.searchedPlaylists;
+  playlistsTab.value = myPlaylists.concat(searchedPlaylists).slice(0, 10);
+});
 </script>

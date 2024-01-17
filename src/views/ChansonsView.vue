@@ -30,4 +30,7 @@
 import ChansonElement from "../components/Chanson.vue";
 import { useStore } from "vuex";
 const store = useStore();
+if (store.state.chansons.length == 0) {
+  store.dispatch("getChansons");
+}
 </script>

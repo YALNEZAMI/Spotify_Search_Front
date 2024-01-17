@@ -15,7 +15,7 @@
       :class="{
         'ml-16': store.state.accessToken != '',
         'ml-0': store.state.accessToken == '',
-        'p-2  md:ml-32 ': true,
+        'p-2  md:ml-36 ': true,
       }"
     />
   </div>

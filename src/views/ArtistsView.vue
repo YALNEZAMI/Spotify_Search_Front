@@ -18,4 +18,7 @@
 import ArtistElement from "../components/Artist.vue";
 import { useStore } from "vuex";
 const store = useStore();
+if (store.state.artists.length == 0) {
+  store.dispatch("getArtists");
+}
 </script>

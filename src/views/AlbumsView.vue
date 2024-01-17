@@ -18,4 +18,7 @@
 import AlbumElement from "../components/Album.vue";
 import { useStore } from "vuex";
 const store = useStore();
+if (store.state.albums.length == 0) {
+  store.dispatch("getAlbums");
+}
 </script>

@@ -36,8 +36,8 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 124px;
-  height: 125px;
+  width: 110px;
+  height: 110px;
   overflow-y: auto;
   z-index: 2;
 }
