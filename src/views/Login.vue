@@ -85,7 +85,8 @@ import { useRouter } from "vue-router";
 //initialisation section
 const router = useRouter();
 const store = useStore();
-const clientId = "a73f77626fd246c9933091187ddfd428"; // Replace with your client ID
+// const clientId = "a73f77626fd246c9933091187ddfd428"; // local
+const clientId = "e2e8ff7af3a5438384f5cc8d3b871aae"; // prod
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 //fonction executé au montage
@@ -110,7 +111,6 @@ onMounted(async () => {
 });
 //fontion de redirection pour se connecter à spotify
 async function redirectToAuthCodeFlow() {
-  const clientId = "a73f77626fd246c9933091187ddfd428"; // Replace with your client ID
   const verifier = generateCodeVerifier(128);
   const challenge = await generateCodeChallenge(verifier);
   localStorage.setItem("verifier", verifier);
