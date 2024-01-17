@@ -22,7 +22,7 @@
             d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
           />
         </svg>
-        <span>Installer l'appli</span>
+        <span class="md:block hidden">Installer l'appli</span>
       </div>
       <!--profile div-->
       <div
@@ -62,25 +62,25 @@
           </span>
         </div>
         <hr class="max-w-1/4" />
-        <div class="flex flex-row text-white truncate">
+        <div class="flex flex-row text-white overflow-x-auto">
           <ChansonElement
             v-show="item.name === 'chansons'"
             class=""
-            v-for="chanson in store.state.chansons"
+            v-for="chanson in chansonsTab"
             :key="chanson.id"
             :chanson="chanson"
           />
           <AlbumElement
             v-show="item.name === 'albums'"
             class="mx-3 w-full md:w-2/5 bg-red-500 my-2 cursor-pointer rounded"
-            v-for="album in store.state.albums"
+            v-for="album in albumsTab"
             :key="album.id"
             :album="album"
           />
           <ArtistElement
             v-show="item.name === 'artists'"
             class="mx-3 w-full md:w-2/5 bg-blue-500 text-white my-2 rounded p-2"
-            v-for="artist in store.state.artists"
+            v-for="artist in artistsTab"
             :key="artist.id"
             :artist="artist"
           />
@@ -89,7 +89,29 @@
     </div>
   </main>
 </template>
-<style scoped></style>
+<style scoped>
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(133, 237, 133);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(232, 144, 144);
+  width: 10px;
+}
+</style>
 <script setup>
 //import section
 import ChansonElement from "../components/Chanson.vue";
@@ -108,14 +130,10 @@ const items = ref([
   { name: "albums", bg: "red" },
   { name: "artists", bg: "blue" },
 ]);
-
+const chansonsTab = ref(store.state.chansons.slice(0, 10));
+const albumsTab = ref(store.state.albums.slice(0, 10));
+const artistsTab = ref(store.state.artists.slice(0, 10));
 onMounted(async () => {
-  //set token to store if not already set
-  // const accessToken = localStorage.getItem("accessToken");
-  // if (accessToken) {
-  //   store.commit("setAccessToken", accessToken);
-  // }
-
   //set chansons to store if not already set
   if (!store.state.chansons.length) {
     await store.dispatch("getDefaultSongs");

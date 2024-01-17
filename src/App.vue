@@ -3,39 +3,47 @@
     <!--side bar-->
     <div
       v-if="store.state.accessToken != ''"
-      class="min-w-44 h-full bg-black fixed border-r-2 border-white"
+      class="md:min-w-44 min-w-10 h-full bg-black fixed border-r-2 border-white"
     >
       <SideBar />
     </div>
     <!--main content-->
     <router-view
+      :style="{
+        paddingLeft: store.state.accessToken != '' ? '5%' : '0',
+      }"
       :class="{
         'ml-44': store.state.accessToken != '',
         'ml-0': store.state.accessToken == '',
-        'p-2': true,
+        'p-2 ml-16 md:ml-32 ': true,
       }"
     />
   </div>
 </template>
 <style scoped></style>
 <script setup>
+//import section
 import SideBar from "./components/SideBar.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { onMounted } from "vue";
+//initialisation section
 const router = useRouter();
 const store = useStore();
+//fonction executé au montage
 onMounted(async () => {
   try {
-    //check if the accessToken is valid
+    //on récupère le token dans le local storage
     const accessToken = localStorage.getItem("accessToken");
+    //on le stocke dans le store
     store.commit("setAccessToken", accessToken);
-    //set profile in the store
+    //on essaye de récupérer le profile, si erreur on catch(token invalide)
     await store.dispatch("getProfile");
+    //si le token est valide, on redirige vers la page home
     router.push("/home");
   } catch (error) {
-    //if accessToken not valid=>clear the localStorage,and redirect to login page
-    //set the accessToken to empty string in the store to hide the side bar
+    //si le token est invalide, on redirige vers la page login
+    //on vide le store et le local storage(pour cacher la side bar)
     store.commit("setAccessToken", "");
     localStorage.clear();
     router.push("/login");

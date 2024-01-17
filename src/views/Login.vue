@@ -1,9 +1,11 @@
 <template>
   <div class="h-screen w-screen bg-black">
     <header class="">
+      <!--logo div-->
       <div class="text-center p-3 flex justify-center mb-6">
         <img class="w-4/5" src="/Spotify_Logo_CMYK_Green.png" alt="" />
       </div>
+      <!--phrase d'intro-->
       <div class="flex justify-center">
         <h1 class="text-center w-2/4 font-bold text-xl text-white mb-2">
           Connectez-vous à votre compte Spotify et profitez d'une expérience de
@@ -12,22 +14,26 @@
       </div>
     </header>
     <main class="relative">
+      <!--ail gauche du bouton login-->
       <div
         @click="redirectToAuthCodeFlow"
         id="left"
         class="bg-green-500 cursor-pointer"
       ></div>
+      <!--ail droit du bouton login-->
       <div
         @click="redirectToAuthCodeFlow"
         id="right"
         class="bg-green-500 cursor-pointer"
       ></div>
-
+      <!--bouton login-->
       <button
         @click="redirectToAuthCodeFlow"
         class="w-3/4 p-3 rounded bg-green-500 flex flex-row justify-center"
       >
+        <!--login word-->
         <div>Login</div>
+        <!-- spotify logo div -->
         <div class="mt-1 mx-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +58,7 @@ main {
   justify-content: center;
   align-items: center;
 }
+/*aim gauche du bouton login*/
 #left {
   border-top-left-radius: 30%;
   position: absolute;
@@ -60,6 +67,7 @@ main {
   width: 50px;
   height: 100px;
 }
+/*aim droit du bouton login*/
 #right {
   border-top-right-radius: 30%;
   position: absolute;
@@ -70,40 +78,42 @@ main {
 }
 </style>
 <script setup>
-//TODO refrech token
+//import section
 import { useStore } from "vuex";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
+//initialisation section
 const router = useRouter();
 const store = useStore();
 const clientId = "a73f77626fd246c9933091187ddfd428"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
+//fonction executé au montage
 onMounted(async () => {
+  //si pas de code, on reste sur la page login
   if (!code) {
     return;
   } else {
-    //set authentification
-
+    //si code
+    //on récupère le token, qui est stocké dans le store et dans le local storage
     const accessToken = await store.dispatch("getAccessToken", {
       clientId,
       code,
     });
-    //set profile in the store
+    //on récupère le profile, qui est stocké dans le store et dans le local storage
     await store.dispatch("getProfile");
     if (accessToken) {
+      //si le token est valide, on redirige vers la page home
       router.push("/home");
     }
   }
 });
-
+//fontion de redirection pour se connecter à spotify
 async function redirectToAuthCodeFlow() {
   const clientId = "a73f77626fd246c9933091187ddfd428"; // Replace with your client ID
   const verifier = generateCodeVerifier(128);
   const challenge = await generateCodeChallenge(verifier);
-
   localStorage.setItem("verifier", verifier);
-
   const params = new URLSearchParams();
   params.append("client_id", clientId);
   params.append("response_type", "code");
@@ -111,21 +121,19 @@ async function redirectToAuthCodeFlow() {
   params.append("scope", "user-read-private user-read-email");
   params.append("code_challenge_method", "S256");
   params.append("code_challenge", challenge);
-
   document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
-
+//fonction auxiliaire à l'authentification
 function generateCodeVerifier(length) {
   let text = "";
   let possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
   for (let i = 0; i < length; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
 }
-
+//fonction auxiliaire à l'authentification
 async function generateCodeChallenge(codeVerifier) {
   const data = new TextEncoder().encode(codeVerifier);
   const digest = await window.crypto.subtle.digest("SHA-256", data);

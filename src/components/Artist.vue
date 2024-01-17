@@ -4,7 +4,11 @@
   >
     <div @click="goTo" class="flex justify-center">
       <img
-        class="rounded-full max-w-28 h-28"
+        :style="{
+          width: '100%',
+          height: '100%',
+        }"
+        class="rounded-full max-w-28 max-h-28"
         :src="artist.images[0].url"
         alt=""
       />

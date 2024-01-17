@@ -45,8 +45,8 @@ const goToArtist = (url) => {
 //   return minutes + ":" + (seconds <script 10 ? "0" : "") + seconds;
 // };
 const getChansonName = () => {
-  if (chanson.name.length > 13) {
-    return chanson.name.substring(0, 13) + "...";
+  if (chanson.name.length > 10) {
+    return chanson.name.substring(0, 10) + "...";
   } else {
     return chanson.name;
   }

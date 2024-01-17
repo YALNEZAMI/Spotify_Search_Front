@@ -1,5 +1,6 @@
 <template>
   <main class="bg-black min-h-screen h-full w-full">
+    <!--search bar component div-->
     <div
       :style="{
         marginRight: '20%',
@@ -7,7 +8,6 @@
       class="flex justify-center"
     >
       <SearchInputElement @search="search" class="w-2/3" />
-      <div class="text-white"></div>
     </div>
     <!--navigation bar-->
     <div
@@ -16,6 +16,7 @@
       }"
       class="nav text-white my-1 flex justify-center"
     >
+      <!--items de la barre de navigation-->
       <span
         @click="navigateTo(item.name)"
         class="m-2 p-1 cursor-pointer px-2 bg-gray-800 border-2 rounded-3xl border-white"
@@ -33,27 +34,28 @@
     <!--main content-->
     <div class="w-screen">
       <div class="w-full h-full bg-black pt-2">
+        <!--nom de l'entité à afficher-->
         <h1 class="text-white hover:text-gray-200">{{ selectedItem }}</h1>
         <hr />
         <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
-          <!--chansons-->
+          <!--chansons component-->
           <ChansonElement
             v-show="selectedItem == 'Chansons'"
             v-for="chanson in store.state.searchedChansons"
             :key="chanson.id"
             :chanson="chanson"
           />
-          <!--albums-->
+          <!--albums component-->
           <AlbumElement
             v-show="selectedItem == 'Albums'"
             v-for="album in store.state.searchedAlbums"
             :key="album.id"
             :album="album"
           />
-          <!--artists-->
+          <!--artists component-->
           <ArtistElement
             v-show="selectedItem == 'Artists'"
-            v-for="artist in store.state.artists"
+            v-for="artist in store.state.searchedArtists"
             :key="artist.id"
             :artist="artist"
           />
