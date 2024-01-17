@@ -130,22 +130,23 @@ const items = ref([
   { name: "albums", bg: "red" },
   { name: "artists", bg: "blue" },
 ]);
-const chansonsTab = ref(store.state.chansons.slice(0, 10));
-const albumsTab = ref(store.state.albums.slice(0, 10));
-const artistsTab = ref(store.state.artists.slice(0, 10));
+const chansonsTab = ref([]);
+const albumsTab = ref([]);
+const artistsTab = ref([]);
 onMounted(async () => {
-  //set chansons to store if not already set
-  if (!store.state.chansons.length) {
+  //si le store est vide, on récupère les chansons, albums et artists par défaut
+  if (
+    chansonsTab.value.length == 0 ||
+    albumsTab.value.length == 0 ||
+    artistsTab.value.length == 0
+  ) {
     await store.dispatch("getDefaultSongs");
-  }
-  //set albums to store if not already set
-  if (!store.state.albums.length) {
     await store.dispatch("getDefaultAlbums");
-  }
-  //set artists to store if not already set
-  if (!store.state.artists.length) {
     await store.dispatch("getDefaultArtists");
   }
+  chansonsTab.value = store.state.chansons.slice(0, 10);
+  albumsTab.value = store.state.albums.slice(0, 10);
+  artistsTab.value = store.state.artists.slice(0, 10);
 });
 
 const download = () => {

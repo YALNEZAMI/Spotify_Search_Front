@@ -5,7 +5,7 @@
         width: 70%;
       }
     "
-    class="bg-black pt-2 w-full truncate overflow-x-hidden"
+    class="bg-black pt-2 w-full min-h-screen truncate overflow-x-hidden"
   >
     <h1 class="text-white hover:text-gray-400">Chansons</h1>
     <hr />

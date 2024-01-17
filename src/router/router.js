@@ -7,6 +7,7 @@ import ArtistsView from "../views/ArtistsView.vue";
 import AlbumsView from "../views/AlbumsView.vue";
 import Profile from "../views/Profile.vue";
 import SearchPage from "../views/SearchPage.vue";
+import MyPlayLists from "../views/MyPlayLists.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -32,6 +33,7 @@ export const router = createRouter({
       component: ArtistsView,
     },
     { path: "/albums", component: AlbumsView },
+    { path: "/myplaylists", component: MyPlayLists },
 
     {
       path: "/home",

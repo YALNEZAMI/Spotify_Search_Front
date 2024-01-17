@@ -10,6 +10,7 @@ export const store = createStore({
       chansons: [],
       searchedChansons: [],
       myChansons: [],
+      myPlaylists: [],
       artists: [],
       searchedArtists: [],
       albums: [],
@@ -56,6 +57,9 @@ export const store = createStore({
     },
     setMyChansons(state, chansons) {
       state.myChansons = chansons;
+    },
+    setMyPlaylists(state, playlists) {
+      state.myPlaylists = playlists;
     },
   },
   actions: {
@@ -223,8 +227,35 @@ export const store = createStore({
       });
       const items = res.data.items;
 
-      commit("setMyChansons", items);
+      commit("setMyPlaylists", items);
       return items;
     },
+    //recuperer mes chansons
+    // async getMySongs({ commit, state }) {
+    //   const res = await axios.get(
+    //     `https://api.spotify.com/v1/me/tracks?limit=50`,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${state.accessToken}`,
+    //       },
+    //     }
+    //   );
+    //   const items = res.data.items;
+
+    //   commit("setMyChansons", items);
+    //   return items;
+    // },
+    //recuperer mes chansons aimées
+    // async getMyLikedSongs({ commit, state }) {
+    //   const res = await axios.get(`https://api.spotify.com/v1/me/tracks`, {
+    //     headers: {
+    //       Authorization: `Bearer ${state.accessToken}`,
+    //     },
+    //   });
+    //   const items = res.data.items;
+
+    //   commit("setMyChansons", items);
+    //   return items;
+    // },
   },
 });

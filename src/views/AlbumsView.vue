@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-full bg-black pt-2">
+  <div class="w-screen min-h-screen bg-black pt-2">
     <h1 class="text-white hover:text-gray-400">Albums</h1>
     <hr />
     <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
