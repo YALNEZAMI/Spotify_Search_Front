@@ -1,20 +1,25 @@
 <template>
   <div
-    class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-32 h-48 m-2 cursor-pointer p-1 relative rounded"
+    class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-28 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
-    <div @click="goTo"><img :src="chanson.album.images[0].url" alt="" /></div>
+    <div @click="goTo">
+      <img class="w-28 h-30" :src="chanson.album.images[0].url" alt="" />
+    </div>
     <div @click="goTo" class="text-center font-bold h-7 my-1 truncate">
-      {{ chanson.name }}
+      {{ getChansonName() }}
     </div>
     <div class="font-serif truncate text-sm hover:underline text-gray-400 h-7">
-      <span
+      <!--<span
         @click="goToArtist(artist.external_urls.spotify)"
         v-for="(artist, index) in chanson.artists"
         :key="artist"
       >
         {{ artist.name }}
         <span v-if="index != chanson.artists.length - 1">,</span> </span
-      ><span v-if="chanson.artists.length > 1">.</span>
+      ><span v-if="chanson.artists.length > 1">.</span>-->
+      <span @click="goToArtist(chanson.artists[0].external_urls.spotify)">
+        {{ getArtistName() }}
+      </span>
     </div>
   </div>
 </template>
@@ -39,20 +44,20 @@ const goToArtist = (url) => {
 //   const seconds = ((ms % 60000) / 1000).toFixed(0);
 //   return minutes + ":" + (seconds <script 10 ? "0" : "") + seconds;
 // };
-// const getSongName = () => {
-//   if (chanson.name.length > 30) {
-//     return chanson.name.substring(0, 30) + "...";
-//   } else {
-//     return chanson.name;
-//   }
-// };
-// const getArtistName = () => {
-//   if (chanson.artists[0].name.length > 7) {
-//     return chanson.artists[0].name.substring(0, 7) + "...";
-//   } else {
-//     return chanson.artists[0].name;
-//   }
-// };
+const getChansonName = () => {
+  if (chanson.name.length > 13) {
+    return chanson.name.substring(0, 13) + "...";
+  } else {
+    return chanson.name;
+  }
+};
+const getArtistName = () => {
+  if (chanson.artists[0].name.length > 7) {
+    return chanson.artists[0].name.substring(0, 7) + "...";
+  } else {
+    return chanson.artists[0].name;
+  }
+};
 // const getDate = () => {
 //   let date = chanson.album.release_date;
 //   let tab = date.split("-");

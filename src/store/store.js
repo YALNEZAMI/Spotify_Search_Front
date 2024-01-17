@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+
 import axios from "axios";
 export const store = createStore({
   state() {
@@ -7,8 +8,11 @@ export const store = createStore({
       accessToken: JSON.parse(localStorage.getItem("")) || "",
       searchKey: "",
       chansons: [],
+      searchedChansons: [],
       artists: [],
+      searchedArtists: [],
       albums: [],
+      searchedAlbums: [],
     };
   },
   mutations: {
@@ -30,6 +34,23 @@ export const store = createStore({
     setProfile(state, profile) {
       localStorage.setItem("profile", JSON.stringify(profile));
       state.profile = profile;
+    },
+    logout(state) {
+      localStorage.clear();
+      state.profile = {};
+      state.accessToken = "";
+      state.chansons = [];
+      state.artists = [];
+      state.albums = [];
+    },
+    setSearchedChansons(state, chansons) {
+      state.searchedChansons = chansons;
+    },
+    setSearchedArtists(state, artists) {
+      state.searchedArtists = artists;
+    },
+    setSearchedAlbums(state, albums) {
+      state.searchedAlbums = albums;
     },
   },
   actions: {
@@ -82,21 +103,27 @@ export const store = createStore({
       commit("setProfile", result.data);
       return result.data;
     },
-    //the endpoint is not working
-    async getDefaultSongs({ commit, state }) {
+
+    async searchSongs({ commit, state }, key) {
+      console.log(key);
       const res = await axios.get(
-        `https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10&offset=5`,
+        `https://api.spotify.com/v1/search?q=${key}&type=track&limit=50`,
         {
           headers: {
             Authorization: `Bearer ${state.accessToken}`,
           },
         }
       );
-      return res.data.tracks.items;
+      const items = res.data.tracks.items;
+      commit("setSearchedChansons", items);
+      return items;
     },
-    async searchSongs({ commit, state }, key) {
+    async getDefaultSongs({ commit, state }) {
+      let letters = "abcdefghijklmnopqrstuvwxyz";
+      let key = letters[Math.floor(Math.random() * letters.length)];
+
       const res = await axios.get(
-        `https://api.spotify.com/v1/search?q=${key}&type=track`,
+        `https://api.spotify.com/v1/search?q=${key}&type=track&limit=50`,
         {
           headers: {
             Authorization: `Bearer ${state.accessToken}`,
@@ -109,7 +136,23 @@ export const store = createStore({
     },
     async searchArtists({ commit, state }, key) {
       const res = await axios.get(
-        `https://api.spotify.com/v1/search?q=${key}&type=artist`,
+        `https://api.spotify.com/v1/search?q=${key}&type=artist&limit=20`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+          },
+        }
+      );
+
+      const items = res.data.artists.items;
+      commit("setSearchedArtists", items);
+      return items;
+    },
+    async getDefaultArtists({ commit, state }) {
+      let letters = "abcdefghijklmnopqrstuvwxyz";
+      let key = letters[Math.floor(Math.random() * letters.length)];
+      const res = await axios.get(
+        `https://api.spotify.com/v1/search?q=${key}&type=artist&limit=20`,
         {
           headers: {
             Authorization: `Bearer ${state.accessToken}`,
@@ -123,7 +166,23 @@ export const store = createStore({
     },
     async searchAlbums({ commit, state }, key) {
       const res = await axios.get(
-        `https://api.spotify.com/v1/search?q=${key}&type=album`,
+        `https://api.spotify.com/v1/search?q=${key}&type=album&limit=50`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+          },
+        }
+      );
+      const items = res.data.albums.items;
+
+      commit("setSearchedAlbums", items);
+      return items;
+    },
+    async getDefaultAlbums({ commit, state }) {
+      let letters = "abcdefghijklmnopqrstuvwxyz";
+      let key = letters[Math.floor(Math.random() * letters.length)];
+      const res = await axios.get(
+        `https://api.spotify.com/v1/search?q=${key}&type=album&limit=50`,
         {
           headers: {
             Authorization: `Bearer ${state.accessToken}`,

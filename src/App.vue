@@ -3,7 +3,7 @@
     <!--side bar-->
     <div
       v-if="store.state.accessToken"
-      class="min-w-44 h-screen bg-black fixed border-r-2 border-white"
+      class="min-w-44 h-full bg-black fixed border-r-2 border-white"
     >
       <SideBar />
     </div>

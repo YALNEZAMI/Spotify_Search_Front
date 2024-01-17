@@ -114,55 +114,25 @@ onMounted(async () => {
   if (accessToken) {
     store.commit("setToken", accessToken);
   }
-  let letters = "abcdefghijklmnopqrstuvwxyz";
-  let randomLetter1 = letters[Math.floor(Math.random() * letters.length)];
-  let randomLetter2 = letters[Math.floor(Math.random() * letters.length)];
-  let randomLetter = randomLetter1 + randomLetter2;
-  //set chansons to store
-  await store.dispatch("searchSongs", randomLetter);
-  //set albums to store
-  await store.dispatch("searchAlbums", randomLetter1);
-  //set artists to store
-  await store.dispatch("searchArtists", randomLetter2);
+
+  //set chansons to store if not already set
+  if (!store.state.chansons.length) {
+    await store.dispatch("getDefaultSongs");
+  }
+  //set albums to store if not already set
+  if (!store.state.albums.length) {
+    await store.dispatch("getDefaultAlbums");
+  }
+  //set artists to store if not already set
+  if (!store.state.artists.length) {
+    await store.dispatch("getDefaultArtists");
+  }
 });
-const search = async (searchInput) => {
-  if (!searchInput) {
-    return;
-  }
-  try {
-    searchKey = searchInput;
-    switch (searchitem.value) {
-      case "chansons":
-        const chansonsResult = await store.dispatch("searchSongs", searchInput);
-        chansons.value = chansonsResult;
-        break;
-      case "albums":
-        const albumsResult = await store.dispatch("searchAlbums", searchInput);
-        albums.value = albumsResult;
-        break;
-
-      case "artists":
-        const artistsResult = await store.dispatch(
-          "searchArtists",
-          searchInput
-        );
-        artists.value = artistsResult;
-
-        break;
-
-      default:
-        break;
-    }
-  } catch (error) {
-    router.push("/login");
-  }
-};
 
 const download = () => {
   window.open("https://www.spotify.com/fr/download/windows/", "_blank");
 };
 const goToItems = (item) => {
-  console.log(item);
-  // searchitem.value = item;
+  router.push("/" + item);
 };
 </script>

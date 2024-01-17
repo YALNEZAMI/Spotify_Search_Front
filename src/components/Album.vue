@@ -2,19 +2,24 @@
   <div
     class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-32 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
-    <div @click="goTo"><img :src="album.images[0].url" alt="" /></div>
+    <div @click="goTo">
+      <img class="w-32 h-28" :src="album.images[0].url" alt="" />
+    </div>
     <div @click="goTo" class="text-center font-bold h-7 my-1 truncate">
-      {{ album.name }}
+      {{ getAlbumName() }}
     </div>
     <div class="font-serif truncate text-sm hover:underline text-gray-400 h-7">
-      <span
+      <!-- <span
         @click="goToArtist(artist.external_urls.spotify)"
         v-for="(artist, index) in album.artists"
         :key="artist"
       >
         {{ artist.name }}
         <span v-if="index != album.artists.length - 1">,</span> </span
-      ><span v-if="album.artists.length > 1">.</span>
+      ><span v-if="album.artists.length > 1">.</span>-->
+      <span @click="goToArtist(album.artists[0].external_urls.spotify)">
+        {{ getArtistName() }}
+      </span>
     </div>
   </div>
 </template>
@@ -40,16 +45,16 @@ const goToArtist = () => {
 };
 const getAlbumName = () => {
   let name = album.name;
-  if (name.length > 30) {
-    return name.substring(0, 30) + "...";
+  if (name.length > 10) {
+    return name.substring(0, 10) + "...";
   } else {
     return name;
   }
 };
 const getArtistName = () => {
   let name = album.artists[0].name;
-  if (name.length > 10) {
-    return name.substring(0, 10) + "...";
+  if (name.length > 14) {
+    return name.substring(0, 14) + "...";
   } else {
     return name;
   }

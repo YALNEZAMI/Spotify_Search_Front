@@ -3,10 +3,14 @@
     class="bg-black hover:bg-gray-700 text-white border-2 border-white min-w-32 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
     <div @click="goTo" class="flex justify-center">
-      <img class="rounded-full w-28 h-28" :src="artist.images[0].url" alt="" />
+      <img
+        class="rounded-full max-w-28 h-28"
+        :src="artist.images[0].url"
+        alt=""
+      />
     </div>
     <div @click="goTo" class="text-center font-bold h-7 my-1 truncate">
-      {{ artist.name }}
+      {{ getName() }}
     </div>
     <div
       class="font-serif truncate text-sm hover:underline flex justify-center space-x-3 text-gray-400 h-7"
@@ -36,8 +40,7 @@
 <script setup>
 import { defineProps } from "vue";
 const { artist } = defineProps(["artist"]);
-console.log(artist);
-console.log(artist);
+
 const goTo = () => {
   window.open(artist.external_urls.spotify, "_blank");
 };
