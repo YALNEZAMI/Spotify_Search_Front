@@ -13,9 +13,9 @@
         paddingLeft: store.state.accessToken != '' ? '5%' : '0',
       }"
       :class="{
-        'ml-16': store.state.accessToken != '',
+        'ml-16 md:ml-36': store.state.accessToken != '',
         'ml-0': store.state.accessToken == '',
-        'p-2  md:ml-36 ': true,
+        'p-2   ': true,
       }"
     />
   </div>
