@@ -35,7 +35,7 @@
           @click="goTo"
           v-if="store.state.profile.images.length == 0"
           class="rounded-full w-32 cursor-pointer"
-          src="../../public/default_user.png"
+          src="/default_user.png"
           alt=""
         />
       </div>
@@ -49,12 +49,23 @@
       <div>Email: {{ store.state.profile.email }}</div>
       <div>Followers: {{ store.state.profile.followers.total }}</div>
     </div>
+    <div class="flex flex-row text-white truncate">
+      <ChansonElement
+        v-show="item.name === 'chansons'"
+        class=""
+        v-for="chanson in store.state.myChansons"
+        :key="chanson.id"
+        :chanson="chanson"
+      />
+    </div>
   </div>
 </template>
 <style scoped></style>
 <script setup>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import ChansonElement from "../components/Chanson.vue";
+import { onMounted } from "vue";
 const router = useRouter();
 const store = useStore();
 const goTo = () => {
@@ -64,4 +75,7 @@ const logout = () => {
   store.commit("logout");
   router.push("/login");
 };
+onMounted(async () => {
+  //   await store.dispatch("getMyChansons");
+});
 </script>

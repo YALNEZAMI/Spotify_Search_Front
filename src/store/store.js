@@ -9,6 +9,7 @@ export const store = createStore({
       searchKey: "",
       chansons: [],
       searchedChansons: [],
+      myChansons: [],
       artists: [],
       searchedArtists: [],
       albums: [],
@@ -16,8 +17,9 @@ export const store = createStore({
     };
   },
   mutations: {
-    setToken(state, accessToken) {
+    setAccessToken(state, accessToken) {
       state.accessToken = accessToken;
+      localStorage.setItem("accessToken", accessToken);
     },
     setSearchKey(state, key) {
       state.searchKey = key;
@@ -52,6 +54,9 @@ export const store = createStore({
     setSearchedAlbums(state, albums) {
       state.searchedAlbums = albums;
     },
+    setMyChansons(state, chansons) {
+      state.myChansons = chansons;
+    },
   },
   actions: {
     async getAccessToken({ commit }, { clientId, code }) {
@@ -71,8 +76,8 @@ export const store = createStore({
       });
 
       const { access_token } = await result.json();
-      commit("setToken", access_token);
-      localStorage.setItem("accessToken", access_token);
+      console.log(access_token);
+      commit("setAccessToken", access_token);
       return access_token;
     },
     async getRefreshToken({ state, commit }) {
@@ -93,8 +98,8 @@ export const store = createStore({
       };
       const body = await axios.post(url, payload);
 
-      localStorage.setItem("access_token", response.accessToken);
-      localStorage.setItem("refresh_token", response.refreshToken);
+      // localStorage.setItem("access_token", response.accessToken);
+      // localStorage.setItem("refresh_token", response.refreshToken);
     },
     async getProfile({ state, commit }) {
       const result = await axios.get("https://api.spotify.com/v1/me", {
@@ -194,5 +199,20 @@ export const store = createStore({
       commit("setAlbums", items);
       return items;
     },
+    // async getMyChansons({ commit, state }) {
+    //   console.log("getMyChansons");
+    //   const res = await axios.get(
+    //     `https://api.spotify.com/v1/me/following?type=artist`,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${state.accessToken}`,
+    //       },
+    //     }
+    //   );
+    //   const items = res.data.albums.items;
+
+    //   commit("setMyChansons", items);
+    //   return items;
+    // },
   },
 });

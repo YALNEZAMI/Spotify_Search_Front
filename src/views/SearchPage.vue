@@ -7,11 +7,7 @@
       class="flex justify-center"
     >
       <SearchInputElement @search="search" class="w-2/3" />
-      <div class="text-white">
-        {{ store.state.searchedChansons.length }}
-        {{ store.state.searchedAlbums.length }}
-        {{ store.state.searchedArtists.length }}
-      </div>
+      <div class="text-white"></div>
     </div>
     <!--navigation bar-->
     <div

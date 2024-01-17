@@ -110,10 +110,11 @@ const items = ref([
 ]);
 
 onMounted(async () => {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    store.commit("setToken", accessToken);
-  }
+  //set token to store if not already set
+  // const accessToken = localStorage.getItem("accessToken");
+  // if (accessToken) {
+  //   store.commit("setAccessToken", accessToken);
+  // }
 
   //set chansons to store if not already set
   if (!store.state.chansons.length) {
