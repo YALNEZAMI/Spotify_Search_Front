@@ -4,7 +4,8 @@ import Login from "../views/Login.vue";
 
 // import ChansonsView from "../views/ChansonsView.vue";
 // import ArtistsView from "../views/ArtistsView.vue";
-// import AlbumsView from "../views/AlbumsView.vue";
+import Profile from "../views/Profile.vue";
+import SearchPage from "../views/SearchPage.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -18,23 +19,27 @@ export const router = createRouter({
       component: Login,
     },
     {
+      path: "/profile",
+      component: Profile,
+    },
+    {
       path: "/home",
       component: HomePage,
-      //   children: [
-      //     {
-      //       path: "/chansons",
-      //       component: ChansonsView,
-      //     },
-      //     {
-      //       path: "/artists",
-      //       component: ArtistsView,
-      //     },
-      //     { path: "/albums", component: AlbumsView },
-      //   ],
+      children: [
+        // {
+        //   path: "/search",
+        //   component: SearchPage,
+        // },
+        // {
+        //   path: "/artists",
+        //   component: ArtistsView,
+        // },
+        // { path: "/albums", component: AlbumsView },
+      ],
     },
-    // {
-    //   path: "/about",
-    //   component: () => import("../pages/About.vue"),
-    // },
+    {
+      path: "/search",
+      component: SearchPage,
+    },
   ],
 });

@@ -19,6 +19,7 @@ const store = useStore();
 const router = useRouter();
 const searchInput = ref("");
 watch(searchInput, () => {
+  store.commit("setSearchKey", searchInput.value);
   emits("search", searchInput.value);
 });
 </script>

@@ -2,11 +2,7 @@
   <div class="h-screen w-screen bg-black">
     <header class="">
       <div class="text-center p-3 flex justify-center mb-6">
-        <img
-          class="w-4/5"
-          src="../../public/Spotify_Logo_CMYK_Green.png"
-          alt=""
-        />
+        <img class="w-4/5" src="/Spotify_Logo_CMYK_Green.png" alt="" />
       </div>
       <div class="flex justify-center">
         <h1 class="text-center w-2/4 font-bold text-xl text-white mb-2">
@@ -87,10 +83,14 @@ onMounted(async () => {
   if (!code) {
     return;
   } else {
-    const accessToken = await getAccessToken(clientId, code);
-    localStorage.clear();
-    store.commit("setToken", accessToken);
-    localStorage.setItem("accessToken", accessToken);
+    //set authentification
+
+    const accessToken = await store.dispatch("getAccessToken", {
+      clientId,
+      code,
+    });
+    //set profile in the store
+    await store.dispatch("getProfile");
     if (accessToken) {
       router.push("/home");
     }
@@ -115,25 +115,6 @@ async function redirectToAuthCodeFlow() {
   document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
-async function getAccessToken(clientId, code) {
-  const verifier = localStorage.getItem("verifier");
-
-  const params = new URLSearchParams();
-  params.append("client_id", clientId);
-  params.append("grant_type", "authorization_code");
-  params.append("code", code);
-  params.append("redirect_uri", "http://localhost:4200/login");
-  params.append("code_verifier", verifier);
-
-  const result = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: params,
-  });
-
-  const { access_token } = await result.json();
-  return access_token;
-}
 function generateCodeVerifier(length) {
   let text = "";
   let possible =
