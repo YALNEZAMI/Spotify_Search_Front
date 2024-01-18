@@ -3,6 +3,7 @@
     class="bg-black tt_container hover:bg-gray-700 text-white border-2 border-white min-w-28 max-w-28 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
     <div
+      @click="goTo"
       class="toolTip border-2 border-white p-2 h-maw whitespace-normal rounded bg-gray-800 text-white"
     >
       {{ playlist.description }}
@@ -19,7 +20,7 @@
       {{ getPlaylistName() }}
     </div>
     <div class="font-serif truncate text-sm hover:underline text-gray-400 h-7">
-      <span @click="goToArtist(playlist.owner.external_urls.spotify)">
+      <span @click="goToOwner(playlist.owner.external_urls.spotify)">
         {{ getOwnerName() }}
       </span>
     </div>
@@ -78,7 +79,7 @@ const { playlist } = defineProps(["playlist"]);
 const goTo = () => {
   window.open(playlist.external_urls.spotify, "_blank");
 };
-const goToArtist = (url) => {
+const goToOwner = (url) => {
   window.open(url, "_blank");
 };
 

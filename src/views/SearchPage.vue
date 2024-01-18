@@ -37,36 +37,50 @@
         <!--nom de l'entité à afficher-->
         <h1 class="text-white hover:text-gray-200">{{ selectedItem }}</h1>
         <hr />
-        <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
+        <div>
           <!--chansons component-->
-          <ChansonElement
-            v-show="selectedItem == 'Chansons' || selectedItem == 'Tout'"
-            v-for="chanson in store.state.searchedChansons"
-            :key="chanson.id"
-            :chanson="chanson"
-          />
-          <!--albums component-->
-          <AlbumElement
-            v-show="selectedItem == 'Albums' || selectedItem == 'Tout'"
-            v-for="album in store.state.searchedAlbums"
-            :key="album.id"
-            :album="album"
-          />
-          <!--artists component-->
-          <ArtistElement
-            v-show="selectedItem == 'Artists' || selectedItem == 'Tout'"
-            v-for="artist in store.state.searchedArtists"
-            :key="artist.id"
-            :artist="artist"
-          />
-          <!--playlists component-->
-          <PlayListElement
-            v-show="selectedItem == 'Playlists' || selectedItem == 'Tout'"
-            class=""
-            v-for="playlist in store.state.searchedPlaylists"
-            :key="playlist.id"
-            :playlist="playlist"
-          />
+          <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
+            <ChansonElement
+              v-show="selectedItem == 'Chansons' || selectedItem == 'Tout'"
+              v-for="chanson in store.state.searchedChansons"
+              :key="chanson.id"
+              :chanson="chanson"
+            />
+          </div>
+
+          <hr />
+          <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
+            <!--albums component-->
+            <AlbumElement
+              v-show="selectedItem == 'Albums' || selectedItem == 'Tout'"
+              v-for="album in store.state.searchedAlbums"
+              :key="album.id"
+              :album="album"
+            />
+          </div>
+
+          <hr />
+          <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
+            <!--artists component-->
+            <ArtistElement
+              v-show="selectedItem == 'Artists' || selectedItem == 'Tout'"
+              v-for="artist in store.state.searchedArtists"
+              :key="artist.id"
+              :artist="artist"
+            />
+          </div>
+
+          <hr />
+          <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
+            <!--playlists component-->
+            <PlayListElement
+              v-show="selectedItem == 'Playlists' || selectedItem == 'Tout'"
+              class=""
+              v-for="playlist in store.state.searchedPlaylists"
+              :key="playlist.id"
+              :playlist="playlist"
+            />
+          </div>
         </div>
       </div>
     </div>

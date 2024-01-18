@@ -23,7 +23,7 @@
       </div>
     </div>
     <div
-      class="text-center flex flex-row justify-end fixed top-0 z-10 bg-black py-1 w-full md:pr-52 pr-28"
+      class="text-center flex flex-row justify-end fixed top-0 z-10 bg-black py-1 w-full md:pr-56 pr-28"
     >
       <!--installer l'appli div-->
       <div

@@ -5,7 +5,6 @@
       <div class="text-center p-3 flex justify-center mb-6">
         <img class="w-4/5" src="/Spotify_Logo_CMYK_Green.png" alt="" />
       </div>
-      <div class="text-white">{{ store.state.accessToken }}</div>
       <!--phrase d'intro-->
       <div class="flex justify-center">
         <h1 class="text-center w-2/4 font-bold text-xl text-white mb-2">

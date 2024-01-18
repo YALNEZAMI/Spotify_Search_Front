@@ -51,8 +51,8 @@ const goTo = () => {
 };
 const getName = () => {
   let name = artist.name;
-  if (name.length > 16) {
-    return name.substring(0, 13) + "...";
+  if (name.length > 13) {
+    return name.substring(0, 10) + "...";
   } else {
     return name;
   }
