@@ -85,8 +85,11 @@ import { useRouter } from "vue-router";
 //initialisation section
 const router = useRouter();
 const store = useStore();
-// const clientId = "a73f77626fd246c9933091187ddfd428"; // local
-const clientId = "e2e8ff7af3a5438384f5cc8d3b871aae"; // prod
+
+const clientId = "a73f77626fd246c9933091187ddfd428"; // local
+if (process.env.NODE_ENV === "production") {
+  clientId = "e2e8ff7af3a5438384f5cc8d3b871aae"; // prod
+}
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 //fonction executé au montage
@@ -111,13 +114,17 @@ onMounted(async () => {
 });
 //fontion de redirection pour se connecter à spotify
 async function redirectToAuthCodeFlow() {
+  let redirect_uri = "http://localhost:4200/login";
+  if (process.env.NODE_ENV === "production") {
+    redirect_uri = "https://spotify-search-app.herokuapp.com/login";
+  }
   const verifier = generateCodeVerifier(128);
   const challenge = await generateCodeChallenge(verifier);
   localStorage.setItem("verifier", verifier);
   const params = new URLSearchParams();
   params.append("client_id", clientId);
   params.append("response_type", "code");
-  params.append("redirect_uri", "http://localhost:4200/login");
+  params.append("redirect_uri", redirect_uri);
   params.append("scope", "user-read-private user-read-email");
   params.append("code_challenge_method", "S256");
   params.append("code_challenge", challenge);
