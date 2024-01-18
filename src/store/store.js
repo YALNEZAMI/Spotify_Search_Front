@@ -4,6 +4,7 @@ import axios from "axios";
 export const store = createStore({
   state() {
     return {
+      ENV: "production",
       profile: JSON.parse(localStorage.getItem("profile")) || "{}",
       accessToken: JSON.parse(localStorage.getItem("")) || "",
       searchKey: "",
@@ -67,9 +68,9 @@ export const store = createStore({
     },
   },
   actions: {
-    async getAccessToken({ commit }, { clientId, code }) {
+    async getAccessToken({ commit, state }, { clientId, code }) {
       let redirect_uri = "http://localhost:4200/login";
-      if (process.env.ENV === "production") {
+      if (state.ENV === "production") {
         redirect_uri = "https://spotify-search-app.herokuapp.com/login";
       }
       const verifier = localStorage.getItem("verifier");

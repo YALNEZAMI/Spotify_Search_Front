@@ -86,8 +86,8 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const store = useStore();
 
-const clientId = "a73f77626fd246c9933091187ddfd428"; // local
-if (process.env.ENV === "production") {
+let clientId = "a73f77626fd246c9933091187ddfd428"; // local
+if (store.state.ENV === "production") {
   clientId = "e2e8ff7af3a5438384f5cc8d3b871aae"; // prod
 }
 const params = new URLSearchParams(window.location.search);
@@ -115,7 +115,7 @@ onMounted(async () => {
 //fontion de redirection pour se connecter à spotify
 async function redirectToAuthCodeFlow() {
   let redirect_uri = "http://localhost:4200/login";
-  if (process.env.ENV === "production") {
+  if (store.state.ENV === "production") {
     redirect_uri = "https://spotify-search-app.herokuapp.com/login";
   }
   const verifier = generateCodeVerifier(128);
