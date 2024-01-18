@@ -31,8 +31,9 @@ import { onMounted } from "vue";
 const router = useRouter();
 const store = useStore();
 const route = useRoute();
-const isLogin = route.path == "/login";
-const isRoot = !route.path.includes("/");
+const classicRoute = window.location.href;
+const isLogin = route.path.includes("login") || classicRoute.includes("login");
+const isRoot = !route.path.includes("/") && !classicRoute.includes("/");
 
 //fonction executé au montage
 onMounted(async () => {
@@ -47,13 +48,13 @@ onMounted(async () => {
     // await store.dispatch("getDefaultAlbums");
     // await store.dispatch("getDefaultArtists");
     //si le token est valide, on redirige vers la page home
-    // router.push("/home");
+    router.push("/home");
   } catch (error) {
+    console.log("catch");
     //si le token est invalide, on redirige vers la page login
     //on vide le store et le local storage(pour cacher la side bar)
     // store.commit("setAccessToken", "");
     // localStorage.clear();
-    console.log("token invalide", error);
     router.push("/login");
   }
 });

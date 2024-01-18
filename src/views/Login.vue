@@ -101,18 +101,14 @@ localStorage.setItem("code", code);
 onMounted(async () => {
   //si pas de code, on reste sur la page login
   if (!code) {
-    console.log("no code");
     return;
   } else {
-    //si code
-    console.log("code", code);
-    //on récupère le token, qui est stocké dans le store et dans le local storage
+    //sinon on récupère le token, qui est stocké dans le store et dans le local storage
     const accessToken = await store.dispatch("getAccessToken", {
       clientId,
       code,
     });
-    console.log("idclient", clientId);
-    console.log("token", accessToken);
+
     //on récupère le profile, qui est stocké dans le store et dans le local storage
     await store.dispatch("getProfile");
     if (accessToken) {
