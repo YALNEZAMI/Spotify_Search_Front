@@ -116,7 +116,7 @@ onMounted(async () => {
 async function redirectToAuthCodeFlow() {
   let redirect_uri = "http://localhost:4200/login";
   if (store.state.ENV === "production") {
-    redirect_uri = "https://spotify-searcher.onrender.com/login";
+    redirect_uri = "https://spotify-searcher.onrender.com/#/login";
   }
   const verifier = generateCodeVerifier(128);
   const challenge = await generateCodeChallenge(verifier);
