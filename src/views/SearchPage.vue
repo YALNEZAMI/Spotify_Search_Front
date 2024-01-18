@@ -19,13 +19,13 @@
       <!--items de la barre de navigation-->
       <span
         @click="navigateTo(item.name)"
-        class="m-1 my-2 p-1 cursor-pointer px-2 bg-gray-800 border-2 rounded-3xl border-white"
         v-for="item in items"
         :key="item.name"
         :class="{
+          'm-1 my-2 p-1 cursor-pointer px-2 bg-gray-800 border-2 rounded-3xl border-white ': true,
           'bg-gray-200 text-black border-2 rounded-3xl border-white':
             item.name === selectedItem,
-          'hover:bg-gray-800 hover:border-2 hover:border-white':
+          'hover:bg-white hover:text-black hover:border-2 hover:border-white':
             item.name !== selectedItem,
         }"
         >{{ item.name }}</span
