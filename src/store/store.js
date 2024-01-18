@@ -4,7 +4,7 @@ import axios from "axios";
 export const store = createStore({
   state() {
     return {
-      ENV: "dev",
+      ENV: "production",
       profile: JSON.parse(localStorage.getItem("profile")) || "{}",
       accessToken: JSON.parse(localStorage.getItem("")) || "",
       searchKey: "",
