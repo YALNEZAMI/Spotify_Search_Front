@@ -93,8 +93,8 @@ if (store.state.ENV === "production") {
   clientId = "e2e8ff7af3a5438384f5cc8d3b871aae"; // prod
 }
 
-const code = localStorage.getItem("code") || route.query.code;
-localStorage.setItem("code", "code");
+const code = route.query.code || localStorage.getItem("code");
+localStorage.setItem("code", code);
 //fonction executé au montage
 onMounted(async () => {
   //si pas de code, on reste sur la page login
