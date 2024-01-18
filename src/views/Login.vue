@@ -81,18 +81,19 @@ main {
 //import section
 import { useStore } from "vuex";
 import { onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 //initialisation section
 const router = useRouter();
 const store = useStore();
+const route = useRoute();
 
 let clientId = "a73f77626fd246c9933091187ddfd428"; // local
 if (store.state.ENV === "production") {
   localStorage.setItem("2", "clientid");
   clientId = "e2e8ff7af3a5438384f5cc8d3b871aae"; // prod
 }
-const params = new URLSearchParams(window.location.search);
-const code = params.get("code");
+
+const code = route.query.code;
 //fonction executé au montage
 onMounted(async () => {
   //si pas de code, on reste sur la page login
