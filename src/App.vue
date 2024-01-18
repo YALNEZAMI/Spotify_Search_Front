@@ -2,7 +2,7 @@
   <div>
     <!--side bar-->
     <div
-      v-if="store.state.accessToken != '' && !isLogin"
+      v-if="store.state.accessToken != '' && !isLogin && !isRoot"
       class="md:min-w-44 min-w-10 h-full bg-black fixed border-r-2 border-white"
     >
       <SideBar />
@@ -13,7 +13,7 @@
         paddingLeft: store.state.accessToken != '' ? '5%' : '0',
       }"
       :class="{
-        'ml-16 md:ml-36': store.state.accessToken != '' && !isLogin,
+        'ml-16 md:ml-36': store.state.accessToken != '' && !isLogin && !isRoot,
         'ml-0': store.state.accessToken == '',
         'p-2   ': true,
       }"
@@ -32,7 +32,7 @@ const router = useRouter();
 const store = useStore();
 const route = useRoute();
 const isLogin = route.path == "/login";
-const isRoot = route.path == "/";
+const isRoot = !route.path.includes("/");
 
 //fonction executé au montage
 onMounted(async () => {
