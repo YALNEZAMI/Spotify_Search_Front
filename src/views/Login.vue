@@ -88,6 +88,8 @@ const store = useStore();
 
 let clientId = "a73f77626fd246c9933091187ddfd428"; // local
 if (store.state.ENV === "production") {
+  localStorage.setItem("2", "clientid");
+
   clientId = "e2e8ff7af3a5438384f5cc8d3b871aae"; // prod
 }
 const params = new URLSearchParams(window.location.search);
@@ -116,6 +118,8 @@ onMounted(async () => {
 async function redirectToAuthCodeFlow() {
   let redirect_uri = "http://localhost:4200/login";
   if (store.state.ENV === "production") {
+    localStorage.setItem("3", "redirectToAuthCodeFlow");
+
     redirect_uri = "https://spotify-searcher.onrender.com/#/login";
   }
   const verifier = generateCodeVerifier(128);

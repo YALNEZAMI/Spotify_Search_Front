@@ -178,6 +178,8 @@ onMounted(async () => {
     await store.dispatch("getDefaultAlbums");
     await store.dispatch("getDefaultArtists");
     await store.dispatch("getDefaultPlaylists");
+    await store.dispatch("getMyPlaylists");
+
     //set searched items to have the same value as the default items
     store.commit("setSearchedChansons", store.state.chansons);
     store.commit("setSearchedAlbums", store.state.albums);
@@ -187,12 +189,9 @@ onMounted(async () => {
   albumsTab.value = store.state.albums.slice(0, 10);
   artistsTab.value = store.state.artists.slice(0, 10);
   //mettre mes playlists en avant
-  let myPlaylists = await store.dispatch("getMyPlaylists");
-  console.log(myPlaylists);
   let searchedPlaylists = store.state.searchedPlaylists;
-  console.log(searchedPlaylists);
   playlistsTab.value = store.state.myPlaylists
-    .concat(store.state.searchedPlaylists)
+    .concat(searchedPlaylists)
     .slice(0, 10);
   initDone.value = true;
 });

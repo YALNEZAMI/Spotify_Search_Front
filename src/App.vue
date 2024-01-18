@@ -48,7 +48,7 @@ onMounted(async () => {
     //si le token est invalide, on redirige vers la page login
     //on vide le store et le local storage(pour cacher la side bar)
     store.commit("setAccessToken", "");
-    // localStorage.clear();
+    localStorage.clear();
     console.log("token invalide", error);
     router.push("/login");
   }
