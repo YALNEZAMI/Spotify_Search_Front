@@ -185,14 +185,14 @@ onMounted(async () => {
     store.commit("setSearchedAlbums", store.state.albums);
     store.commit("setSearchedArtists", store.state.artists);
   }
-  chansonsTab.value = store.state.chansons.slice(0, 10);
-  albumsTab.value = store.state.albums.slice(0, 10);
-  artistsTab.value = store.state.artists.slice(0, 10);
+  chansonsTab.value = store.state.chansons.slice(0, 15);
+  albumsTab.value = store.state.albums.slice(0, 15);
+  artistsTab.value = store.state.artists.slice(0, 15);
   //mettre mes playlists en avant
   let searchedPlaylists = store.state.searchedPlaylists;
   playlistsTab.value = store.state.myPlaylists
     .concat(searchedPlaylists)
-    .slice(0, 10);
+    .slice(0, 15);
   initDone.value = true;
 });
 

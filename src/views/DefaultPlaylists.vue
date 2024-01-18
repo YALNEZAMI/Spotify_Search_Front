@@ -57,6 +57,6 @@ onMounted(async () => {
   }
   let myPlaylists = store.state.myPlaylists;
   let searchedPlaylists = store.state.searchedPlaylists;
-  playlistsTab.value = myPlaylists.concat(searchedPlaylists).slice(0, 10);
+  playlistsTab.value = myPlaylists.concat(searchedPlaylists).slice(0, 15);
 });
 </script>
