@@ -69,7 +69,7 @@ export const store = createStore({
   actions: {
     async getAccessToken({ commit }, { clientId, code }) {
       let redirect_uri = "http://localhost:4200/login";
-      if (process.env.NODE_ENV === "production") {
+      if (process.env.ENV === "production") {
         redirect_uri = "https://spotify-search-app.herokuapp.com/login";
       }
       const verifier = localStorage.getItem("verifier");
