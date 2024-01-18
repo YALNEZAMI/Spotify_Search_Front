@@ -15,7 +15,7 @@
     <div class="text-white mt-2 space-y-2">
       <!--accueil btn-->
       <div
-        @click="$router.push('/home')"
+        @click="$router.push('/admin/home')"
         class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
       >
         <svg
@@ -36,7 +36,7 @@
       </div>
       <!--accueil btn-->
       <div
-        @click="$router.push('/profile')"
+        @click="$router.push('/admin/profile')"
         class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
       >
         <svg
@@ -58,7 +58,7 @@
       </div>
       <!--rechercher btn-->
       <div
-        @click="$router.push('/search')"
+        @click="$router.push('/admin/search')"
         class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
       >
         <svg

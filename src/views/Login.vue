@@ -113,7 +113,7 @@ onMounted(async () => {
     await store.dispatch("getProfile");
     if (accessToken) {
       //si le token est valide, on redirige vers la page home
-      router.push("/home");
+      router.push("/admin/home");
     }
   }
 });

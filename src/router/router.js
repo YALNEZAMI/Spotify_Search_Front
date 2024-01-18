@@ -9,6 +9,7 @@ import Profile from "../views/Profile.vue";
 import SearchPage from "../views/SearchPage.vue";
 import MyPlayLists from "../views/MyPlayLists.vue";
 import DefaultPlaylists from "../views/DefaultPlaylists.vue";
+import Admin from "../views/Admin.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -22,28 +23,34 @@ export const router = createRouter({
       component: Login,
     },
     {
-      path: "/profile",
-      component: Profile,
-    },
-    {
-      path: "/chansons",
-      component: ChansonsView,
-    },
-    {
-      path: "/artists",
-      component: ArtistsView,
-    },
-    { path: "/albums", component: AlbumsView },
-    { path: "/myplaylists", component: MyPlayLists },
-    { path: "/playlists", component: DefaultPlaylists },
+      path: "/admin",
+      component: Admin,
+      children: [
+        {
+          path: "profile",
+          component: Profile,
+        },
+        {
+          path: "chansons",
+          component: ChansonsView,
+        },
+        {
+          path: "artists",
+          component: ArtistsView,
+        },
+        { path: "albums", component: AlbumsView },
+        { path: "myplaylists", component: MyPlayLists },
+        { path: "playlists", component: DefaultPlaylists },
 
-    {
-      path: "/home",
-      component: HomePage,
-    },
-    {
-      path: "/search",
-      component: SearchPage,
+        {
+          path: "home",
+          component: HomePage,
+        },
+        {
+          path: "search",
+          component: SearchPage,
+        },
+      ],
     },
   ],
 });

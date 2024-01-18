@@ -100,7 +100,7 @@
     <div class="flex justify-between">
       <h1 class="mt-3">Playlists</h1>
       <span
-        @click="$router.push('/myplaylists')"
+        @click="$router.push('/admin/myplaylists')"
         class="text-gray-400 cursor-pointer pt-3 hover:underline"
         >Tout voir</span
       >

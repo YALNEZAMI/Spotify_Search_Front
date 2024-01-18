@@ -48,7 +48,7 @@
       </div>
       <!--profile div-->
       <div
-        @click="$router.push('/profile')"
+        @click="$router.push('/admin/profile')"
         class="profile cursor-pointer flex flex-col justify-center text-center rounded h-11 p-1 bg-white ml-3 min-w-20 hover:bg-black hover:text-white"
       >
         <div class="flex justify-center">
@@ -200,6 +200,6 @@ const download = () => {
   window.open("https://www.spotify.com/fr/download/windows/", "_blank");
 };
 const goToItems = (item) => {
-  router.push("/" + item);
+  router.push("/admin/" + item);
 };
 </script>

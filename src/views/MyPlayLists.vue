@@ -10,7 +10,7 @@
     <div class="flex justify-between pr-16">
       <h1 class="text-white hover:text-gray-400">Playlists</h1>
       <svg
-        @click="$router.push('/profile')"
+        @click="$router.push('/admin/profile')"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
