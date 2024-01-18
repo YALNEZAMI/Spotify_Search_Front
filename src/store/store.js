@@ -71,7 +71,6 @@ export const store = createStore({
     async getAccessToken({ commit, state }, { clientId, code }) {
       let redirect_uri = "";
       if (state.ENV === "production") {
-        localStorage.setItem("1", "getAccessToken");
         redirect_uri = "https://spotify-searcher.onrender.com/#/login";
       } else {
         redirect_uri = "http://localhost:4200";
