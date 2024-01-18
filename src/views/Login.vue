@@ -100,13 +100,16 @@ localStorage.setItem("code", code);
 onMounted(async () => {
   //si pas de code, on reste sur la page login
   if (!code) {
+    console.log("no code");
     return;
   } else {
+    console.log("code", code);
     //sinon on récupère le token, qui est stocké dans le store et dans le local storage
     const accessToken = await store.dispatch("getAccessToken", {
       clientId,
       code,
     });
+    console.log("accessToken", accessToken);
 
     //on récupère le profile, qui est stocké dans le store et dans le local storage
     await store.dispatch("getProfile");
@@ -122,7 +125,7 @@ async function redirectToAuthCodeFlow() {
   if (store.state.ENV === "production") {
     localStorage.setItem("3", "redirectToAuthCodeFlow");
 
-    redirect_uri = "https://spotify-searcher.onrender.com/#/login";
+    redirect_uri = "https://spotify-searcher.onrender.com";
   } else {
     redirect_uri = "http://localhost:4200";
   }
