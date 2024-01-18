@@ -5,6 +5,7 @@
       <div class="text-center p-3 flex justify-center mb-6">
         <img class="w-4/5" src="/Spotify_Logo_CMYK_Green.png" alt="" />
       </div>
+      <div class="text-white">{{ store.state.accessToken }}</div>
       <!--phrase d'intro-->
       <div class="flex justify-center">
         <h1 class="text-center w-2/4 font-bold text-xl text-white mb-2">
@@ -87,12 +88,13 @@ const router = useRouter();
 const store = useStore();
 const route = useRoute();
 
-let clientId = "a73f77626fd246c9933091187ddfd428"; // local
+let clientId = ""; // local
 if (store.state.ENV === "production") {
   localStorage.setItem("2", "clientid");
   clientId = "e2e8ff7af3a5438384f5cc8d3b871aae"; // prod
+} else {
+  clientId = "a73f77626fd246c9933091187ddfd428"; // local}
 }
-
 const code = route.query.code || localStorage.getItem("code");
 localStorage.setItem("code", code);
 //fonction executé au montage
@@ -103,11 +105,13 @@ onMounted(async () => {
     return;
   } else {
     //si code
+    console.log("code", code);
     //on récupère le token, qui est stocké dans le store et dans le local storage
     const accessToken = await store.dispatch("getAccessToken", {
       clientId,
       code,
     });
+    console.log("idclient", clientId);
     console.log("token", accessToken);
     //on récupère le profile, qui est stocké dans le store et dans le local storage
     await store.dispatch("getProfile");
@@ -119,11 +123,13 @@ onMounted(async () => {
 });
 //fontion de redirection pour se connecter à spotify
 async function redirectToAuthCodeFlow() {
-  let redirect_uri = "http://localhost:4200/login";
+  let redirect_uri = "";
   if (store.state.ENV === "production") {
     localStorage.setItem("3", "redirectToAuthCodeFlow");
 
     redirect_uri = "https://spotify-searcher.onrender.com/#/login";
+  } else {
+    redirect_uri = "http://localhost:4200";
   }
   const verifier = generateCodeVerifier(128);
   const challenge = await generateCodeChallenge(verifier);

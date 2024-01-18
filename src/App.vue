@@ -2,7 +2,7 @@
   <div>
     <!--side bar-->
     <div
-      v-if="store.state.accessToken != ''"
+      v-if="store.state.accessToken != '' && !isLogin"
       class="md:min-w-44 min-w-10 h-full bg-black fixed border-r-2 border-white"
     >
       <SideBar />
@@ -13,7 +13,7 @@
         paddingLeft: store.state.accessToken != '' ? '5%' : '0',
       }"
       :class="{
-        'ml-16 md:ml-36': store.state.accessToken != '',
+        'ml-16 md:ml-36': store.state.accessToken != '' && !isLogin,
         'ml-0': store.state.accessToken == '',
         'p-2   ': true,
       }"
@@ -25,11 +25,15 @@
 //import section
 import SideBar from "./components/SideBar.vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { onMounted } from "vue";
 //initialisation section
 const router = useRouter();
 const store = useStore();
+const route = useRoute();
+const isLogin = route.path == "/login";
+const isRoot = route.path == "/";
+
 //fonction executé au montage
 onMounted(async () => {
   try {
@@ -47,8 +51,8 @@ onMounted(async () => {
   } catch (error) {
     //si le token est invalide, on redirige vers la page login
     //on vide le store et le local storage(pour cacher la side bar)
-    store.commit("setAccessToken", "");
-    localStorage.clear();
+    // store.commit("setAccessToken", "");
+    // localStorage.clear();
     console.log("token invalide", error);
     router.push("/login");
   }
