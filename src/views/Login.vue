@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-screen bg-black">
+  <div class="h-full min-h-screen w-screen bg-black">
     <header class="">
       <!--logo div-->
       <div class="text-center p-3 flex justify-center mb-6">

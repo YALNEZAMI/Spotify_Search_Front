@@ -4,7 +4,7 @@ import axios from "axios";
 export const store = createStore({
   state() {
     return {
-      ENV: "production",
+      ENV: "dev",
       profile: JSON.parse(localStorage.getItem("profile")) || "{}",
       accessToken: JSON.parse(localStorage.getItem("")) || "",
       searchKey: "",
@@ -79,6 +79,7 @@ export const store = createStore({
     async getAccessToken({ commit, state }, { clientId, code }) {
       let redirect_uri = "";
       if (state.ENV === "production") {
+        localStorage.setItem("1", "getAccessToken");
         redirect_uri = "https://spotify-searcher.onrender.com/#/login";
       } else {
         redirect_uri = "http://localhost:4200";
