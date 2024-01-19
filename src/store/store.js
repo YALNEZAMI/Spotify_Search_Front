@@ -17,6 +17,11 @@ export const store = createStore({
       searchedPlaylists: [],
       albums: [],
       searchedAlbums: [],
+      laUne: {
+        img: "/default_music.jpg",
+        url: "",
+        name: "Unkown",
+      },
     };
   },
   mutations: {
@@ -65,6 +70,9 @@ export const store = createStore({
     },
     setMyPlaylists(state, playlists) {
       state.myPlaylists = playlists;
+    },
+    setUne(state, une) {
+      state.laUne = une;
     },
   },
   actions: {
@@ -117,7 +125,7 @@ export const store = createStore({
       commit("setSearchedChansons", items);
       return items;
     },
-    async getDefaultSongs({ commit, state }) {
+    async getDefaultChansons({ commit, state }) {
       let letters = "abcdefghijklmnopqrstuvwxyz";
       let key = letters[Math.floor(Math.random() * letters.length)];
 
@@ -130,6 +138,12 @@ export const store = createStore({
         }
       );
       const items = res.data.tracks.items;
+      const laUne = {
+        img: items[0].album.images[0].url,
+        url: items[0].external_urls.spotify,
+        name: items[0].name,
+      };
+      commit("setUne", laUne);
       commit("setChansons", items);
       return items;
     },
