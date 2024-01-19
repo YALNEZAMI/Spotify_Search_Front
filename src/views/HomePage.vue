@@ -25,6 +25,13 @@
     <div
       class="text-center flex flex-row justify-end fixed top-0 z-10 bg-black py-1 w-full md:pr-56 pr-28"
     >
+      <!--premium-->
+      <div
+        @click="premium"
+        class="bg-white text-black font-bold p-2 rounded-3xl mx-2 cursor-pointer hover:bg-gray-200 hover:text-black"
+      >
+        Découvrez Premium
+      </div>
       <!--installer l'appli div-->
       <div
         class="flex space-x-2 cursor-pointer text-white border-2 border-white p-2 rounded hover:bg-gray-200 hover:text-black"
@@ -172,7 +179,7 @@ onMounted(async () => {
     store.state.artists.length == 0
   ) {
     //if the store is empty, we get the default chansons, albums and artists
-    await store.dispatch("getDefaultSongs");
+    await store.dispatch("getDefaultChansons");
     await store.dispatch("getDefaultAlbums");
     await store.dispatch("getDefaultArtists");
     await store.dispatch("getDefaultPlaylists");
@@ -199,5 +206,11 @@ const download = () => {
 };
 const goToItems = (item) => {
   router.push("/admin/" + item);
+};
+const premium = () => {
+  window.open(
+    "https://www.spotify.com/fr/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade&ref=web_loggedin_upgrade_button",
+    "_blank"
+  );
 };
 </script>
