@@ -4,7 +4,7 @@ import axios from "axios";
 export const store = createStore({
   state() {
     return {
-      ENV: "dev",
+      ENV: "production",
       profile: JSON.parse(localStorage.getItem("profile")) || "{}",
       accessToken: JSON.parse(localStorage.getItem("")) || "",
       searchKey: "",
@@ -79,8 +79,7 @@ export const store = createStore({
     async getAccessToken({ commit, state }, { clientId, code }) {
       let redirect_uri = "";
       if (state.ENV === "production") {
-        localStorage.setItem("1", "getAccessToken");
-        redirect_uri = "https://spotify-searcher.onrender.com/#/login";
+        redirect_uri = "https://spotify-searcher.onrender.com";
       } else {
         redirect_uri = "http://localhost:4200";
       }
@@ -138,12 +137,15 @@ export const store = createStore({
         }
       );
       const items = res.data.tracks.items;
+      //set laUne to a random song
+      const randomItem = items[Math.floor(Math.random() * items.length)];
       const laUne = {
-        img: items[0].album.images[0].url,
-        url: items[0].external_urls.spotify,
-        name: items[0].name,
+        img: randomItem.album.images[0].url,
+        url: randomItem.external_urls.spotify,
+        name: randomItem.name,
       };
       commit("setUne", laUne);
+      //set chansons in the store
       commit("setChansons", items);
       return items;
     },

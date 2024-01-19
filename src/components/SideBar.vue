@@ -77,15 +77,15 @@
         ><span class="min-w-32 hidden sm:block">Rechercher</span>
       </div>
     </div>
-    <hr class="mt-2 max-w-10" />
-    <hr class="my-1 max-w-20" />
-    <hr class="mb-2 max-w-32" />
+    <hr class="mt-2 sm:max-w-10" />
+    <hr class="my-1 sm:max-w-20" />
+    <hr class="mb-2 sm:max-w-32" />
     <!--à la une-->
     <div class="text-white hidden sm:block">
       <h1 class="p-1 und font-bold text-center">
         Son du jour: {{ store.state.laUne.name.substring(0, 11) }}
       </h1>
-      <div class="w-44 h-52 cursor-pointer" @click="goToUne">
+      <div class="w-44 m-1 h-52 cursor-pointer" @click="goToUne">
         <img :src="store.state.laUne.img" alt="" />
       </div>
     </div>
