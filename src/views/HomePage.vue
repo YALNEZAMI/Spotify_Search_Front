@@ -94,14 +94,12 @@
           />
           <AlbumElement
             v-show="item.name === 'albums'"
-            class="mx-3 w-full md:w-2/5 bg-red-500 my-2 cursor-pointer rounded"
             v-for="album in albumsTab"
             :key="album.id"
             :album="album"
           />
           <ArtistElement
             v-show="item.name === 'artists'"
-            class="mx-3 w-full md:w-2/5 bg-blue-500 text-white my-2 rounded p-2"
             v-for="artist in artistsTab"
             :key="artist.id"
             :artist="artist"
