@@ -2,7 +2,7 @@
   <div>
     <!--side bar-->
     <div
-      class="md:min-w-44 min-w-10 h-full bg-black fixed border-r-2 border-white z-20"
+      class="sm:min-w-44 min-w-10 h-full bg-black fixed border-r-2 border-white z-20"
     >
       <SideBar />
     </div>

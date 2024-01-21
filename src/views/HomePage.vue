@@ -22,8 +22,9 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
+    <!--head bar-->
     <div
-      class="text-center flex flex-row justify-end fixed top-0 z-10 bg-black py-1 w-full md:pr-56 pr-28"
+      class="text-center flex flex-row justify-end fixed top-0 z-10 bg-black py-1 w-full sm:pr-52 pr-24"
     >
       <!--premium-->
       <div
@@ -51,7 +52,7 @@
             d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
           />
         </svg>
-        <span class="md:block hidden">Installer l'appli</span>
+        <span class="sm:block hidden">Installer l'appli</span>
       </div>
       <!--profile div-->
       <div
