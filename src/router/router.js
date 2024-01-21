@@ -52,5 +52,9 @@ export const router = createRouter({
         },
       ],
     },
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: "/", // redirect to home page if user types in a bad url
+    },
   ],
 });

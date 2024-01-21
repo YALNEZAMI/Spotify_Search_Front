@@ -7,7 +7,7 @@
         alt=""
       />
       <img
-        class="w-16 block sm:hidden"
+        class="w-14 block sm:hidden"
         src="/Spotify_Icon_CMYK_Green.png"
         alt=""
       />
