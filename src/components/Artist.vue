@@ -5,7 +5,9 @@
     <div @click="goTo" class="flex justify-center">
       <img
         class="rounded-full max-w-24 min-w-24 max-h-24 min-h-24 text-white"
-        :src="artist.images[0].url"
+        :src="
+          artist.images[0].url ? artist.images[0].url : '/default_artist.jpg'
+        "
         onerror="this.src='/default_artist.jpg'"
         alt="img"
       />

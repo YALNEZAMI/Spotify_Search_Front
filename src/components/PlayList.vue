@@ -11,7 +11,11 @@
     <div @click="goTo">
       <img
         class="w-28 h-30"
-        :src="playlist.images[0].url"
+        :src="
+          playlist.images[0].url
+            ? playlist.images[0].url
+            : '/default_playlist.jpg'
+        "
         alt="playlist img"
         onerror="this.src='/default_playlist.jpg'"
       />

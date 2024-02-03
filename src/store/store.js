@@ -5,8 +5,9 @@ export const store = createStore({
   state() {
     return {
       ENV: "production",
-      profile: JSON.parse(localStorage.getItem("profile")) || "{}",
-      accessToken: JSON.parse(localStorage.getItem("")) || "",
+      hasAccount: true,
+      profile: JSON.parse(localStorage.getItem("profile")) || null,
+      accessToken: localStorage.getItem("accessToken") || "",
       searchKey: "",
       chansons: [],
       searchedChansons: [],
@@ -74,6 +75,9 @@ export const store = createStore({
     setUne(state, une) {
       state.laUne = une;
     },
+    setHasAccount(state, hasAccount) {
+      state.hasAccount = hasAccount;
+    },
   },
   actions: {
     async getAccessToken({ commit, state }, { clientId, code }) {
@@ -104,6 +108,7 @@ export const store = createStore({
 
     //get profile from spotify api
     async getProfile({ state, commit }) {
+      if (state.hasAccount === false) return;
       const result = await axios.get("https://api.spotify.com/v1/me", {
         headers: { Authorization: `Bearer ${state.accessToken}` },
       });
@@ -238,6 +243,7 @@ export const store = createStore({
       return items;
     },
     async searchPlaylists({ commit, state }, key) {
+      console.log(state.accessToken);
       const res = await axios.get(
         `https://api.spotify.com/v1/search?q=${key}&type=playlist`,
         {
@@ -277,5 +283,16 @@ export const store = createStore({
     //   commit("setMyChansons", items);
     //   return items;
     // },
+    async getAccessTokenWithoutAccount({ commit, state }) {
+      let uri = "";
+      if (state.ENV === "production") {
+        uri = "https://spotify-server-jj29.onrender.com"; //to be changed
+      } else {
+        uri = "http://localhost:3000";
+      }
+      const res = await axios.get(uri + "/accessToken");
+      commit("setAccessToken", res.data);
+      return res.data;
+    },
   },
 });

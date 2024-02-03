@@ -15,8 +15,15 @@
     <div class="text-white mt-2 space-y-2">
       <!--accueil btn-->
       <div
-        @click="$router.push('/admin/home')"
+        @click="
+          $router.push('/admin/home');
+          selectedPart = 'accueil';
+        "
         class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
+        :style="{
+          'background-color': selectedPart === 'accueil' ? 'white' : 'black',
+          color: selectedPart === 'accueil' ? 'black' : 'white',
+        }"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -34,10 +41,18 @@
         </svg>
         <span class="min-w-32 hidden sm:block">Accueil</span>
       </div>
-      <!--accueil btn-->
+      <!--profile btn-->
       <div
-        @click="$router.push('/admin/profile')"
+        v-if="store.state.hasAccount"
+        @click="
+          $router.push('/admin/profile');
+          selectedPart = 'profil';
+        "
         class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
+        :style="{
+          'background-color': selectedPart === 'profil' ? 'white' : 'black',
+          color: selectedPart === 'profil' ? 'black' : 'white',
+        }"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -58,8 +73,15 @@
       </div>
       <!--rechercher btn-->
       <div
-        @click="$router.push('/admin/search')"
+        @click="
+          $router.push('/admin/search');
+          selectedPart = 'rechercher';
+        "
         class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
+        :style="{
+          'background-color': selectedPart === 'rechercher' ? 'white' : 'black',
+          color: selectedPart === 'rechercher' ? 'black' : 'white',
+        }"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -75,6 +97,31 @@
             d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.774ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
           /></svg
         ><span class="min-w-32 hidden sm:block">Rechercher</span>
+      </div>
+      <!--logout-->
+      <div
+        v-if="!store.state.hasAccount"
+        @click="logout"
+        class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
+        :style="{
+          'background-color': selectedPart === 'rechercher' ? 'white' : 'black',
+          color: selectedPart === 'rechercher' ? 'black' : 'white',
+        }"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
+          /></svg
+        ><span class="min-w-32 hidden sm:block">Logout</span>
       </div>
     </div>
     <hr class="mt-2 sm:max-w-10" />
@@ -93,10 +140,19 @@
 </template>
 <style scoped></style>
 <script setup>
-import ChansonElement from "./Chanson.vue";
+//import ChansonElement from "./Chanson.vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
+import { ref } from "vue";
+const selectedPart = ref("accueil");
 const store = useStore();
+const router = useRouter();
 const goToUne = () => {
   if (store.state.laUne.url != "") window.open(store.state.laUne.url, "_blank");
+};
+const logout = () => {
+  store.commit("logout");
+  router.push("/login");
 };
 </script>

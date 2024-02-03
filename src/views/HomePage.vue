@@ -56,6 +56,7 @@
       </div>
       <!--profile div-->
       <div
+        v-if="store.state.hasAccount"
         @click="$router.push('/admin/profile')"
         class="profile relative text-white cursor-pointer flex flex-col justify-center text-center rounded h-11 p-1 bg-black ml-3 hover:bg-gray-500"
       >
@@ -206,7 +207,9 @@ onMounted(async () => {
     await store.dispatch("getDefaultAlbums");
     await store.dispatch("getDefaultArtists");
     await store.dispatch("getDefaultPlaylists");
-    await store.dispatch("getMyPlaylists");
+    if (store.state.hasAccount) {
+      await store.dispatch("getMyPlaylists");
+    }
 
     //set searched items to have the same value as the default items
     store.commit("setSearchedChansons", store.state.chansons);

@@ -50,6 +50,14 @@
         </div>
       </button>
     </main>
+    <div class="flex justify-center">
+      <button
+        @click="loginWithoutAccount"
+        class="mt-4 bg-green-600 hover:bg-green-500 p-2 rounded cursor-pointer"
+      >
+        I do not have a Spotify account
+      </button>
+    </div>
   </div>
 </template>
 <style scoped>
@@ -112,6 +120,8 @@ onMounted(async () => {
     //on récupère le profile, qui est stocké dans le store et dans le local storage
     await store.dispatch("getProfile");
     if (accessToken) {
+      store.commit("setHasAccount", true);
+
       //si le token est valide, on redirige vers la page home
       router.push("/admin/home");
     }
@@ -155,5 +165,12 @@ async function generateCodeChallenge(codeVerifier) {
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
+}
+async function loginWithoutAccount() {
+  const token = await store.dispatch("getAccessTokenWithoutAccount");
+  if (token) {
+    store.commit("setHasAccount", false);
+    router.push("/admin/home");
+  }
 }
 </script>
