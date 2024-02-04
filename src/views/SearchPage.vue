@@ -32,7 +32,7 @@
       >
     </div>
     <!--main content-->
-    <div class="w-screen">
+    <div class="w-full">
       <div class="w-full h-full bg-black pt-2">
         <!--nom de l'entité à afficher-->
         <h1 class="text-white hover:text-gray-200 pl-2">{{ selectedItem }}</h1>
@@ -40,7 +40,7 @@
         <!--chansons component-->
         <div
           v-show="selectedItem == 'Chansons' || selectedItem == 'Tout'"
-          class="flex pr-20 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex sm:pr-20 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
         >
           <ChansonElement
             v-for="chanson in store.state.searchedChansons"

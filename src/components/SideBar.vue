@@ -103,10 +103,6 @@
         v-if="!store.state.hasAccount"
         @click="logout"
         class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
-        :style="{
-          'background-color': selectedPart === 'rechercher' ? 'white' : 'black',
-          color: selectedPart === 'rechercher' ? 'black' : 'white',
-        }"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
