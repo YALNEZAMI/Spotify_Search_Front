@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-black hover:bg-gray-700 text-white border-2 border-gray-400 min-w-28 max-w-32 h-48 m-2 cursor-pointer p-1 relative rounded"
+    class="bg-black hover:bg-gray-700 text-white border-2 border-gray-400 min-w-32 max-w-32 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
     <div @click="goTo" class="flex justify-center">
       <img

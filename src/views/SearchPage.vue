@@ -40,7 +40,7 @@
         <!--chansons component-->
         <div
           v-show="selectedItem == 'Chansons' || selectedItem == 'Tout'"
-          class="flex sm:pr-20 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex sm:pr-18 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
         >
           <ChansonElement
             v-for="chanson in store.state.searchedChansons"
@@ -51,7 +51,7 @@
 
         <div
           v-show="selectedItem == 'Albums' || selectedItem == 'Tout'"
-          class="flex pr-20 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex pr-18 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
         >
           <!--albums component-->
           <AlbumElement
@@ -62,7 +62,7 @@
         </div>
 
         <div
-          class="flex pr-20 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex pr-18 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
           v-show="selectedItem == 'Artists' || selectedItem == 'Tout'"
         >
           <!--artists component-->
@@ -75,7 +75,7 @@
 
         <div
           v-show="selectedItem == 'Playlists' || selectedItem == 'Tout'"
-          class="flex pr-20 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex pr-18 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
         >
           <!--playlists component-->
           <PlayListElement
