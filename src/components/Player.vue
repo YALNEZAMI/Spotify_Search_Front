@@ -250,9 +250,9 @@ onMounted(() => {
     if (!obj.first) {
       play();
     }
-    const saved = await store.dispatch("isSaved", chanson.value);
-    details.value.saved = saved;
-    console.log("saved", saved);
+    // const saved = await store.dispatch("isSaved", chanson.value);
+    // details.value.saved = saved;
+    // console.log("saved", saved);
   });
   //playing  stuff
   const audio = document.getElementById("audioPlayer");
@@ -287,17 +287,23 @@ function formatTime(time) {
 //   isPlaying.value = true;
 // };
 const next = () => {
-  if (index.value < chansons.length - 1) {
-    index.value++;
-    chanson.value = chansons[index.value];
-    play();
+  if (index.value >= chansons.length - 1) {
+    const newChanson = store.state.chansons[Math.floor(Math.random() * 20)];
+    chansons.push(newChanson);
   }
+  index.value++;
+  chanson.value = chansons[index.value];
+  setTimeout(() => {
+    play();
+  }, 10);
 };
 const previous = () => {
   if (index.value > 0) {
     index.value--;
     chanson.value = chansons[index.value];
-    play();
+    setTimeout(() => {
+      play();
+    }, 10);
   }
 };
 const changeProgress = (e) => {
