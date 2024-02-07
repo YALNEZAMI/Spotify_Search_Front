@@ -19,10 +19,10 @@
           $router.push('/admin/home');
           selectedPart = 'accueil';
         "
-        class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
-        :style="{
-          'background-color': selectedPart === 'accueil' ? 'white' : 'black',
-          color: selectedPart === 'accueil' ? 'black' : 'white',
+        :class="{
+          'flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white': true,
+          'background-color': selectedPart === 'rechercher' ? 'white' : 'black',
+          color: selectedPart === 'rechercher' ? 'black' : 'white',
         }"
       >
         <svg
@@ -77,8 +77,8 @@
           $router.push('/admin/search');
           selectedPart = 'rechercher';
         "
-        class="flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white"
-        :style="{
+        :class="{
+          'flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white': true,
           'background-color': selectedPart === 'rechercher' ? 'white' : 'black',
           color: selectedPart === 'rechercher' ? 'black' : 'white',
         }"
