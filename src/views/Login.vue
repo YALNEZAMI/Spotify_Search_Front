@@ -123,16 +123,13 @@ const code = route.query.code;
 onMounted(async () => {
   //si pas de code, on reste sur la page login
   if (!code) {
-    console.log("no code");
     return;
   } else {
-    console.log("code", code);
     //sinon on récupère le token, qui est stocké dans le store et dans le local storage
     const accessToken = await store.dispatch("getAccessToken", {
       clientId,
       code,
     });
-    console.log("accessToken", accessToken);
 
     //on récupère le profile, qui est stocké dans le store et dans le local storage
     await store.dispatch("getProfile");

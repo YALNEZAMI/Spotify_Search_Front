@@ -35,7 +35,7 @@
       </div>
       <!--installer l'appli div-->
       <div
-        class="flex space-x-2 cursor-pointer text-white border-2 border-white p-2 rounded hover:bg-gray-200 hover:text-black"
+        class="flex h-max space-x-2 cursor-pointer text-white border-2 border-white p-2 rounded hover:bg-gray-200 hover:text-black"
         @click="download"
       >
         <svg
@@ -66,7 +66,7 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="w-6 h-6"
+          class="w-8 h-8"
         >
           <path
             stroke-linecap="round"

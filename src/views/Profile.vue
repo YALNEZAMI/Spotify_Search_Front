@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black h-screen text-white">
+  <div class="bg-black h-full text-white">
     <div class="flex justify-end">
       <div
         @click="logout"

@@ -11,7 +11,6 @@ export const store = createStore({
       hasAccount: true,
       profile: JSON.parse(localStorage.getItem("profile")) || null,
       accessToken: localStorage.getItem("accessToken") || "",
-
       searchKey: "",
       chansons: [],
       searchedChansons: [],
@@ -303,6 +302,31 @@ export const store = createStore({
       const res = await axios.get(uri + "/accessToken");
       commit("setAccessToken", res.data);
       return res.data;
+    },
+    async saveSong({ state }, song) {
+      //put https://api.spotify.com/v1/me/tracks
+      //body {ids: [song.id]}
+      const res = await axios.put(
+        `https://api.spotify.com/v1/me/tracks`,
+        { ids: [song.id] },
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+          },
+        }
+      );
+      return res.data;
+    },
+    async isSaved({ state }, song) {
+      const res = await axios.get(
+        `https://api.spotify.com/v1/me/tracks/contains?ids=${song.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`,
+          },
+        }
+      );
+      return res.data[0];
     },
   },
 });

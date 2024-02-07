@@ -13,7 +13,9 @@
       }"
     />
     <!--player-->
-    <div class="bg-black border-2 mx-1 fixed bottom-0 left-0 z-20 w-full h-16">
+    <div
+      class="bg-black border-y-2 px-1 fixed bottom-0 left-0 z-20 w-full h-16"
+    >
       <PlayerVue />
     </div>
   </div>
