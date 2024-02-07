@@ -118,18 +118,19 @@
         </div>
       </div>
       <!--progress bar-->
-      <div class="text-white pb-1 flex items-center relative">
+      <div class="text-white pb-1 flex items-center">
         <small>{{ details.currentTime }}</small>
         <div
           @click="changeProgress($event)"
-          class="w-full bg-gray-400 h-1 mx-2 cursor-pointer"
-        ></div>
-        <span
-          class="bg-white h-1 absolute top-2 left-8"
-          :style="{
-            width: details.percentagePlayed + '%',
-          }"
-        ></span>
+          class="w-full bg-gray-400 h-1 mx-2 cursor-pointer relative"
+        >
+          <span
+            class="bg-white h-1 absolute top-0 left-0"
+            :style="{
+              width: details.percentagePlayed + '%',
+            }"
+          ></span>
+        </div>
       </div>
     </div>
 
