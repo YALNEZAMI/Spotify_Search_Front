@@ -117,14 +117,18 @@
         </div>
       </div>
       <!--progress bar-->
-      <div class="text-white pb-1 flex items-center">
+      <div class="text-white pb-1 flex items-center relative">
         <small>{{ details.currentTime }}</small>
         <div
+          @click="changeProgress($event)"
+          class="w-full bg-gray-400 h-1 mx-2"
+        ></div>
+        <span
+          class="bg-white h-1 absolute top-2 left-8"
           :style="{
             width: details.percentagePlayed + '%',
           }"
-          class="w-full border-2 h-1 mx-2 bg-white"
-        ></div>
+        ></span>
       </div>
     </div>
 
@@ -207,8 +211,6 @@ const play = () => {
 
 onMounted(() => {
   onEvent("setChansonEnCours", (c) => {
-    chanson.value = c;
-
     if (c.preview_url == null) {
       alert.value.bool = true;
       alert.value.message = c.name + " n'est pas disponible en preview";
@@ -217,6 +219,7 @@ onMounted(() => {
       }, 3000);
       return;
     }
+    chanson.value = c;
     //insertion de la chanson dans le tableau de chansons
     chansons.push(c);
     index.value = chansons.length - 1;
@@ -267,5 +270,13 @@ const previous = () => {
     chanson.value = chansons[index.value];
     playSong(chanson.value);
   }
+};
+const changeProgress = (e) => {
+  const audio = document.getElementById("audioPlayer");
+  const bar = e.target;
+  const bounding = bar.getBoundingClientRect();
+  const x = e.clientX - bounding.left;
+  const percentage = (x / bounding.width) * 100;
+  audio.currentTime = (audio.duration * percentage) / 100;
 };
 </script>
