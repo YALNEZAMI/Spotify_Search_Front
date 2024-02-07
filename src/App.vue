@@ -15,5 +15,9 @@ onMounted(async () => {
       router.push("/login");
     }
   }, 1000);
+  //set the hasAccount state to false if the user is null
+  if (!store.state.profile) {
+    store.commit("setHasAccount", false);
+  }
 });
 </script>

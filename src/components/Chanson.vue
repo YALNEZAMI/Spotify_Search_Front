@@ -2,7 +2,7 @@
   <div
     class="bg-black hover:bg-gray-700 text-white border-2 border-gray-400 min-w-28 max-w-28 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
-    <div @click="goTo">
+    <div @click="play">
       <img
         class="w-28 h-30"
         :src="chanson.album.images[0].url"
@@ -10,7 +10,7 @@
         alt="img"
       />
     </div>
-    <div @click="goTo" class="text-center font-bold h-7 my-1 truncate">
+    <div @click="play" class="text-center font-bold h-7 my-1 truncate">
       {{ getChansonName() }}
     </div>
     <div class="font-serif truncate text-sm hover:underline text-gray-400 h-7">
@@ -36,9 +36,15 @@
 </style>
 <script setup>
 import { defineProps, onMounted, computed, ref } from "vue";
+import { useStore } from "vuex";
+import { useEventBus } from "../events/events";
+const { emitEvent } = useEventBus();
+
+const store = useStore();
 const { chanson } = defineProps(["chanson"]);
-const goTo = () => {
-  window.open(chanson.external_urls.spotify, "_blank");
+
+const play = () => {
+  emitEvent("setChansonEnCours", chanson);
 };
 const goToArtist = (url) => {
   window.open(url, "_blank");

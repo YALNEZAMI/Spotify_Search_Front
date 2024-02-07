@@ -137,8 +137,6 @@ onMounted(async () => {
     //on récupère le profile, qui est stocké dans le store et dans le local storage
     await store.dispatch("getProfile");
     if (accessToken) {
-      store.commit("setHasAccount", true);
-
       //si le token est valide, on redirige vers la page home
       router.push("/admin/home");
     }
@@ -184,10 +182,11 @@ async function generateCodeChallenge(codeVerifier) {
     .replace(/=+$/, "");
 }
 async function loginWithoutAccount() {
+  store.commit("setHasAccount", false);
+
   connectingWithoutAccount.value = true;
   const token = await store.dispatch("getAccessTokenWithoutAccount");
   if (token) {
-    store.commit("setHasAccount", false);
     router.push("/admin/home");
   } else {
     connectingWithoutAccount.value = false;

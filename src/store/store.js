@@ -8,6 +8,7 @@ export const store = createStore({
       hasAccount: true,
       profile: JSON.parse(localStorage.getItem("profile")) || null,
       accessToken: localStorage.getItem("accessToken") || "",
+
       searchKey: "",
       chansons: [],
       searchedChansons: [],
@@ -142,9 +143,11 @@ export const store = createStore({
         }
       );
       const items = res.data.tracks.items;
+      console.log(items);
       //set laUne to a random song
       const randomItem = items[Math.floor(Math.random() * items.length)];
       const laUne = {
+        preview_url: randomItem.preview_url,
         img: randomItem.album.images[0].url,
         url: randomItem.external_urls.spotify,
         name: randomItem.name,
@@ -197,6 +200,8 @@ export const store = createStore({
       );
 
       const items = res.data.playlists.items;
+      console.log(items);
+
       commit("setSearchedPlaylists", items);
       return items;
     },
@@ -226,7 +231,6 @@ export const store = createStore({
         }
       );
       const items = res.data.albums.items;
-
       commit("setAlbums", items);
       return items;
     },
@@ -243,7 +247,6 @@ export const store = createStore({
       return items;
     },
     async searchPlaylists({ commit, state }, key) {
-      console.log(state.accessToken);
       const res = await axios.get(
         `https://api.spotify.com/v1/search?q=${key}&type=playlist`,
         {
