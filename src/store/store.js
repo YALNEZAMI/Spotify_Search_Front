@@ -1,6 +1,9 @@
 import { createStore } from "vuex";
 
 import axios from "axios";
+import { useEventBus } from "../events/events";
+const { emitEvent } = useEventBus();
+
 export const store = createStore({
   state() {
     return {
@@ -143,7 +146,12 @@ export const store = createStore({
         }
       );
       const items = res.data.tracks.items;
-      console.log(items);
+      //set the first song to be played in the store
+      emitEvent("setChansonEnCours", {
+        song: items.find((item) => item.preview_url),
+        first: true,
+      });
+
       //set laUne to a random song
       const randomItem = items[Math.floor(Math.random() * items.length)];
       const laUne = {
@@ -200,7 +208,6 @@ export const store = createStore({
       );
 
       const items = res.data.playlists.items;
-      console.log(items);
 
       commit("setSearchedPlaylists", items);
       return items;

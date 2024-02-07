@@ -44,7 +44,10 @@ const store = useStore();
 const { chanson } = defineProps(["chanson"]);
 
 const play = () => {
-  emitEvent("setChansonEnCours", chanson);
+  emitEvent("setChansonEnCours", {
+    song: chanson,
+    first: false,
+  });
 };
 const goToArtist = (url) => {
   window.open(url, "_blank");

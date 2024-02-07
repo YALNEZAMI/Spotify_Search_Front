@@ -12,20 +12,19 @@
       controls
       loop
       id="audioPlayer"
-      src="https://p.scdn.co/mp3-preview/f378accb359a59d9be327b4ca06234261e9f08b5?cid=a73f77626fd246c9933091187ddfd428"
+      :src="chanson.preview_url"
     >
       Your browser does not support the audio element.
     </audio>
     <!--current song-->
     <div class="flex text-white w-1/4">
       <img
-        id="img"
         :class="{
           'w-12 h-12 rounded-full': true,
           circle: isPlaying,
         }"
-        src="https://i.scdn.co/image/ab67616d0000b273df4862f641044c61c4abe602"
         alt=""
+        :src="chanson.album.images[0].url"
       />
       <div class="flex flex-col w-28 mx-2 text-white">
         <span class="truncate">{{ chanson.name }}</span>
@@ -59,10 +58,11 @@
           </svg>
         </div>
         <!--play-->
-        <div @click="play" class="text-white h-max border-2 rounded-full">
+        <div class="text-white h-max border-2 rounded-full">
           <!--play btn-->
           <svg
             v-if="!isPlaying"
+            @click="play"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -83,6 +83,7 @@
           </svg>
           <!--pause btn-->
           <svg
+            @click="pause"
             v-else
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -121,7 +122,7 @@
         <small>{{ details.currentTime }}</small>
         <div
           @click="changeProgress($event)"
-          class="w-full bg-gray-400 h-1 mx-2"
+          class="w-full bg-gray-400 h-1 mx-2 cursor-pointer"
         ></div>
         <span
           class="bg-white h-1 absolute top-2 left-8"
@@ -169,6 +170,7 @@ const alert = ref({
   bool: false,
   message: "",
 });
+//default song
 const chanson = ref({
   name: "VVS",
   artists: [{ name: "Ninho" }],
@@ -199,31 +201,33 @@ const goTo = () => {
 };
 const play = () => {
   let audio = document.getElementById("audioPlayer");
-  //   audioPlayer.src = store.state.chanson.preview_url;
-  if (audio.paused) {
-    audio.play();
-    isPlaying.value = true;
-  } else {
-    audio.pause();
-    isPlaying.value = false;
-  }
+  audio.play();
+  isPlaying.value = true;
 };
-
+const pause = () => {
+  let audio = document.getElementById("audioPlayer");
+  audio.pause();
+  isPlaying.value = false;
+};
 onMounted(() => {
-  onEvent("setChansonEnCours", (c) => {
-    if (c.preview_url == null) {
+  onEvent("setChansonEnCours", (obj) => {
+    if (obj.song.preview_url == null) {
       alert.value.bool = true;
-      alert.value.message = c.name + " n'est pas disponible en preview";
+      alert.value.message = obj.song.name + " n'est pas disponible en preview";
       setTimeout(() => {
         alert.value.bool = false;
       }, 3000);
       return;
     }
-    chanson.value = c;
+    chanson.value = obj.song;
     //insertion de la chanson dans le tableau de chansons
-    chansons.push(c);
+    chansons.push(obj.song);
     index.value = chansons.length - 1;
-    playSong(c);
+    if (!obj.first) {
+      setTimeout(() => {
+        play();
+      }, 1000);
+    }
   });
   //playing  stuff
   const audio = document.getElementById("audioPlayer");
@@ -249,26 +253,26 @@ function formatTime(time) {
   const seconds = Math.floor(time % 60);
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
-const playSong = (c) => {
-  let audio = document.getElementById("audioPlayer");
-  let img = document.getElementById("img");
-  img.src = c.album.images[0].url;
-  audio.src = c.preview_url;
-  audio.play();
-  isPlaying.value = true;
-};
+// const playSong = (c) => {
+//   let audio = document.getElementById("audioPlayer");
+//   let img = document.getElementById("img");
+//   img.src = c.album.images[0].url;
+//   audio.src = c.preview_url;
+//   audio.play();
+//   isPlaying.value = true;
+// };
 const next = () => {
   if (index.value < chansons.length - 1) {
     index.value++;
     chanson.value = chansons[index.value];
-    playSong(chanson.value);
+    play();
   }
 };
 const previous = () => {
   if (index.value > 0) {
     index.value--;
     chanson.value = chansons[index.value];
-    playSong(chanson.value);
+    play();
   }
 };
 const changeProgress = (e) => {
