@@ -26,7 +26,7 @@
         alt=""
         :src="chanson.album.images[0].url"
       />
-      <div class="flex flex-col w-28 mx-2 text-white">
+      <div class="sm:flex hidden flex-col w-28 mx-2 text-white">
         <span class="truncate">{{ chanson.name }}</span>
         <small class="truncate text-gray-400">{{
           chanson.artists[0].name
