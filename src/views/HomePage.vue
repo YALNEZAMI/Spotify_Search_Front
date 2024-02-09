@@ -29,7 +29,7 @@
       <!--premium-->
       <div
         @click="premium"
-        class="bg-white text-black font-bold p-2 rounded-3xl mx-2 cursor-pointer hover:bg-gray-200 hover:text-black"
+        class="bg-white text-black font-bold sm:p-2 p-1 rounded-3xl mx-2 cursor-pointer hover:bg-gray-200 hover:text-black"
       >
         Découvrez Premium
       </div>

@@ -139,13 +139,17 @@
           </svg>
         </div>
       </div>
-      <!--progress bar-->
+      <!--progress and time config-->
       <div class="text-white pb-1 flex items-center">
+        <!--time-->
         <small>{{ details.currentTime }}</small>
+        <!--gray global bar-->
         <div
+          @mousemove="hoverProgress($event)"
           @click="changeProgress($event)"
           class="w-full bg-gray-400 h-1 mx-2 cursor-pointer relative"
         >
+          <!--progress bar-->
           <span
             class="bg-white h-1 absolute top-0 left-0"
             :style="{
@@ -318,5 +322,12 @@ const saveSong = async () => {
   details.value.saved = true;
   const saving = await store.dispatch("saveSong", chanson.value);
   console.log("saving", saving);
+};
+const hoverProgress = (e) => {
+  const bar = e.target;
+  const bounding = bar.getBoundingClientRect();
+  const x = e.clientX - bounding.left;
+  const percentage = (x / bounding.width) * 100;
+  details.value.percentagePlayed = percentage;
 };
 </script>

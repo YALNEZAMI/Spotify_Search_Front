@@ -1,21 +1,11 @@
 <template>
-  <main class="bg-black min-h-screen h-full w-full">
+  <main class="bg-black min-h-screen h-full p-1">
     <!--search bar component div-->
-    <div
-      :style="{
-        marginRight: '20%',
-      }"
-      class="flex justify-center"
-    >
+    <div class="flex justify-center">
       <SearchInputElement @search="search" class="w-2/3" />
     </div>
     <!--navigation bar-->
-    <div
-      :style="{
-        marginRight: '20%',
-      }"
-      class="nav text-white mt-1 pl-5 flex flex-wrap justify-center"
-    >
+    <div class="nav text-white mt-1 flex flex-wrap justify-center">
       <!--items de la barre de navigation-->
       <span
         @click="navigateTo(item.name)"
@@ -40,7 +30,7 @@
         <!--chansons component-->
         <div
           v-show="selectedItem == 'Chansons' || selectedItem == 'Tout'"
-          class="flex sm:pr-18 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex sm:pr-18 text-white flex-wrap py-3 px-1 border-b-2 border-white"
         >
           <ChansonElement
             v-for="chanson in store.state.searchedChansons"
@@ -51,7 +41,7 @@
 
         <div
           v-show="selectedItem == 'Albums' || selectedItem == 'Tout'"
-          class="flex pr-18 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex sm:pr-18 text-white flex-wrap py-3 border-b-2 border-white"
         >
           <!--albums component-->
           <AlbumElement
@@ -62,7 +52,7 @@
         </div>
 
         <div
-          class="flex pr-18 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex pr-18 text-white flex-wrap py-3 border-b-2 border-white"
           v-show="selectedItem == 'Artists' || selectedItem == 'Tout'"
         >
           <!--artists component-->
@@ -75,7 +65,7 @@
 
         <div
           v-show="selectedItem == 'Playlists' || selectedItem == 'Tout'"
-          class="flex pr-18 text-white flex-wrap p-3 w-11/12 border-b-2 border-white"
+          class="flex pr-18 text-white flex-wrap py-3 border-b-2 border-white"
         >
           <!--playlists component-->
           <PlayListElement

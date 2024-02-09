@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black h-full text-white">
+  <main class="bg-black sm:min-w-screen min-h-screen h-full text-white">
     <div class="flex justify-end">
       <div
         @click="logout"
@@ -45,7 +45,9 @@
       >
         {{ store.state.profile.display_name }}
       </div>
+      <!--other user data-->
       <div class="flex flex-row space-x-10 justify-center">
+        <!--country-->
         <div class="flex space-x-2">
           <span>{{ store.state.profile.country }}</span
           ><svg
@@ -63,7 +65,8 @@
             />
           </svg>
         </div>
-        <div class="flex space-x-2">
+        <!--email pc-->
+        <div class="sm:flex hidden space-x-2">
           <span>{{ store.state.profile.email }}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +99,26 @@
           </svg>
         </div>
       </div>
+      <!--mobile email-->
+      <div class="sm:hidden flex justify-center space-x-2 my-1">
+        <span>{{ store.state.profile.email }}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+          />
+        </svg>
+      </div>
     </div>
+    <!--my playlists-->
     <div class="flex justify-between">
       <h1 class="mt-3">Playlists</h1>
       <span
@@ -114,7 +136,7 @@
         :playlist="playlist"
       />
     </div>
-  </div>
+  </main>
 </template>
 <style scoped>
 /* width */

@@ -9,7 +9,7 @@
     <!--main content-->
     <router-view
       :class="{
-        'p-2 pl-6 sm:pl-7  ml-14 sm:ml-44   ': true,
+        'p-2 pl-20 sm:pl-48     ': true,
       }"
     />
     <!--player-->
