@@ -145,10 +145,20 @@
         <small>{{ details.currentTime }}</small>
         <!--gray global bar-->
         <div
+          id="progressBar"
           @mousemove="hoverProgress($event)"
           @click="changeProgress($event)"
           class="w-full bg-gray-400 h-1 mx-2 cursor-pointer relative"
         >
+          <!--hover ball-->
+          <span
+            id="ball"
+            class="bg-white h-2 w-2 rounded-full absolute"
+            :style="{
+              left: details.percentagePlayed + '%',
+              top: '-1px',
+            }"
+          ></span>
           <!--progress bar-->
           <span
             class="bg-white h-1 absolute top-0 left-0"
@@ -161,8 +171,9 @@
     </div>
 
     <!--spotify img-->
-    <div class="cursor-pointer flex flex-row-reverse w-1/4" @click="goTo">
+    <div class="flex flex-row-reverse w-1/4">
       <img
+        @click="goTo"
         class="w-12 h-12 rounded-full cursor-pointer"
         src="../../public/Spotify_Icon_CMYK_Green.png"
         alt=""
@@ -171,6 +182,9 @@
   </main>
 </template>
 <style scoped>
+#progressBar:hover #ball {
+  display: block;
+}
 .circle {
   border-radius: 50%; /* Makes the div circular */
   position: relative;
