@@ -2,7 +2,7 @@
   <div class="w-screen min-h-screen bg-black pt-2">
     <h1 class="text-white hover:text-gray-400">Artists</h1>
     <hr />
-    <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
+    <div class="flex text-white flex-wrap py-3 w-full">
       <ArtistElement
         class=""
         v-for="artist in store.state.artists"

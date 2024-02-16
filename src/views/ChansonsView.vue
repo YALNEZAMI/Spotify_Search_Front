@@ -9,12 +9,7 @@
   >
     <h1 class="text-white hover:text-gray-400">Chansons</h1>
     <hr />
-    <div
-      :style="{
-        paddingRight: '13%',
-      }"
-      class="flex text-white flex-wrap w-full truncate"
-    >
+    <div class="flex text-white flex-wrap w-full truncate">
       <ChansonElement
         class=""
         v-for="chanson in store.state.chansons"

@@ -2,7 +2,7 @@
   <div class="w-screen min-h-screen bg-black pt-2">
     <h1 class="text-white hover:text-gray-400">Albums</h1>
     <hr />
-    <div class="flex pr-20 text-white flex-wrap p-3 w-11/12">
+    <div class="flex w-full text-white flex-wrap py-3">
       <AlbumElement
         class=""
         v-for="album in store.state.albums"
