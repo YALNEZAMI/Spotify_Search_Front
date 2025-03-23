@@ -7,7 +7,7 @@ const { emitEvent } = useEventBus();
 export const store = createStore({
   state() {
     return {
-      ENV: "production",
+      ENV: "prod",
       hasAccount: true,
       profile: JSON.parse(localStorage.getItem("profile")) || null,
       accessToken: localStorage.getItem("accessToken") || "",
@@ -144,18 +144,25 @@ export const store = createStore({
           },
         }
       );
+      console.log("res", res);
+
       const items = res.data.tracks.items;
       //set the first song to be played in the store
       emitEvent("setChansonEnCours", {
-        song: items.find((item) => item.preview_url),
+        song: items.find((item) => item.preview_url != null),
         first: true,
       });
 
       //set laUne to a random song
       const randomItem = items[Math.floor(Math.random() * items.length)];
+      console.log("randomItem", randomItem);
+
       const laUne = {
         preview_url: randomItem.preview_url,
-        img: randomItem.album.images[0].url,
+        img:
+          randomItem.album.images.length > 0
+            ? randomItem.album.images[0].url
+            : "https://cdn.pixabay.com/photo/2024/02/16/20/25/sheet-music-8578311_1280.jpg",
         url: randomItem.external_urls.spotify,
         name: randomItem.name,
       };
