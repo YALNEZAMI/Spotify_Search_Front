@@ -1,6 +1,6 @@
 <template>
   <main class="bg-black sm:min-w-screen min-h-screen h-full text-white">
-    <div class="flex justify-end">
+    <div class="flex justify-end m-1">
       <div
         @click="logout"
         class="flex space-x-2 border-2 cursor-pointer border-white w-max p-1 rounded hover:bg-gray-200 hover:text-black"
@@ -26,7 +26,7 @@
       <div class="flex justify-center">
         <img
           @click="goTo"
-          class="cursor-pointer"
+          class="cursor-pointer rounded-md"
           v-if="store.state.profile.images.length > 0"
           :src="store.state.profile.images[0].url"
           alt=""
@@ -83,7 +83,7 @@
             />
           </svg>
         </div>
-        <div class="flex space-x-2">
+        <div title="Followers" class="flex space-x-2">
           <span> {{ store.state.profile.followers.total }}</span
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -131,8 +131,8 @@
     <div class="flex flex-row text-white overflow-x-auto">
       <PlaylListElement
         class=""
-        v-for="playlist in store.state.myPlaylists"
-        :key="playlist.id"
+        v-for="(playlist, i) in store.state.myPlaylists"
+        :key="i"
         :playlist="playlist"
       />
     </div>
