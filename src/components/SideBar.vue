@@ -77,7 +77,7 @@
           selectedPart = 'rechercher';
         "
         :class="{
-          'flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white': true,
+          'flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white my-2': true,
           'bg-white text-black': route.path == '/admin/search',
         }"
       >
