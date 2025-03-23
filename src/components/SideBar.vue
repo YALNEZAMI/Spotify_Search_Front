@@ -21,8 +21,7 @@
         "
         :class="{
           'flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white': true,
-          'background-color': selectedPart === 'rechercher' ? 'white' : 'black',
-          color: selectedPart === 'rechercher' ? 'black' : 'white',
+          'bg-white text-black': route.path == '/admin/home',
         }"
       >
         <svg
@@ -79,8 +78,7 @@
         "
         :class="{
           'flex px-2 space-x-2 justify-center cursor-pointer hover:text-black hover:bg-white': true,
-          'background-color': selectedPart === 'rechercher' ? 'white' : 'black',
-          color: selectedPart === 'rechercher' ? 'black' : 'white',
+          'bg-white text-black': route.path == '/admin/search',
         }"
       >
         <svg
@@ -117,7 +115,7 @@
             stroke-linejoin="round"
             d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
           /></svg
-        ><span class="min-w-32 hidden sm:block">Logout</span>
+        ><span class="min-w-32 hidden sm:block">Se déconnecter</span>
       </div>
     </div>
     <hr class="mt-2 sm:max-w-10" />
@@ -138,9 +136,11 @@
 <script setup>
 //import ChansonElement from "./Chanson.vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 import { ref } from "vue";
+const route = useRoute();
+console.log(route.path);
 const selectedPart = ref("accueil");
 const store = useStore();
 const router = useRouter();
