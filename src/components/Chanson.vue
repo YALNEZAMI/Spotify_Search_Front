@@ -5,7 +5,7 @@
     <div @click="play">
       <img
         class="w-28 h-30"
-        :src="chanson.album.images[0].url"
+        :src="getImgSrc()"
         onerror="this.src='/default_music.jpg'"
         alt="img"
       />
@@ -70,6 +70,13 @@ const getArtistName = () => {
     return chanson.artists[0].name.substring(0, 13) + "...";
   } else {
     return chanson.artists[0].name;
+  }
+};
+const getImgSrc = () => {
+  if (chanson.album.images.length > 0) {
+    return chanson.album.images[0].url;
+  } else {
+    return "/default_music.jpg";
   }
 };
 // const getDate = () => {
