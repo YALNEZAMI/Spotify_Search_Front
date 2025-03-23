@@ -4,7 +4,7 @@
       <input
         v-model="searchInput"
         type="text"
-        class="rounded p-2 border-2 text-white border-white w-full bg-gray-700"
+        class="rounded p-2 border-2 text-white border-white w-full bg-gray-700 focus:bg-gray-500 transition-all duration-300"
         placeholder="Baby shark..."
       />
       <svg
