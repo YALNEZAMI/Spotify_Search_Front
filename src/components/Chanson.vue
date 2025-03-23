@@ -4,7 +4,7 @@
   >
     <div @click="play">
       <img
-        class="w-28 h-30"
+        class="w-28 h-30 max-h-28"
         :src="getImgSrc()"
         onerror="this.src='/default_music.jpg'"
         alt="img"
