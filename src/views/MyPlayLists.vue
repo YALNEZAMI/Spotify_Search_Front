@@ -29,8 +29,8 @@
     <div class="flex text-white flex-wrap w-full truncate">
       <PlayListElement
         class=""
-        v-for="playlist in store.state.myPlaylists"
-        :key="playlist.id"
+        v-for="(playlist, i) in store.state.myPlaylists"
+        :key="i"
         :playlist="playlist"
       />
     </div>
