@@ -13,7 +13,7 @@
         </h1>
       </div>
     </header>
-    <main class="relative">
+    <main v-if="false" class="relative">
       <!--ail gauche du bouton login-->
       <div
         @click="redirectToAuthCodeFlow"
@@ -53,10 +53,10 @@
     <div class="flex justify-center">
       <button
         @click="loginWithoutAccount"
-        class="mt-4 bg-green-600 hover:bg-green-500 p-2 rounded cursor-pointer"
+        class="mt-4 transition-all duration-300 bg-green-600 hover:bg-green-500 p-2 rounded cursor-pointer"
       >
         <span v-if="!connectingWithoutAccount">
-          I do not have a Spotify account</span
+          Connect and begin the adventure !</span
         >
         <!--use v-show to make element exist and capture it within the connectWithoutAccound method to make the time symbol move-->
         <div v-show="connectingWithoutAccount" class="flex">
