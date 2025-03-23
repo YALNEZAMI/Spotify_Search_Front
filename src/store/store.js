@@ -7,7 +7,7 @@ const { emitEvent } = useEventBus();
 export const store = createStore({
   state() {
     return {
-      ENV: "prod",
+      ENV: "production", //production|dev
       hasAccount: true,
       profile: JSON.parse(localStorage.getItem("profile")) || null,
       accessToken: localStorage.getItem("accessToken") || "",
