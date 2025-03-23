@@ -70,8 +70,8 @@
           <!--playlists component-->
           <PlayListElement
             class=""
-            v-for="playlist in store.state.searchedPlaylists"
-            :key="playlist.id"
+            v-for="(playlist, i) in store.state.searchedPlaylists"
+            :key="i"
             :playlist="playlist"
           />
         </div>
