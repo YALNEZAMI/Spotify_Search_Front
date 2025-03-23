@@ -1,12 +1,13 @@
 <template>
   <div
+    v-if="playlist != null"
     class="bg-black tt_container hover:bg-gray-700 text-white border-2 border-gray-400 min-w-28 max-w-28 h-48 m-2 cursor-pointer p-1 relative rounded"
   >
     <div
       @click="goTo"
       class="toolTip border-2 border-white p-2 h-maw whitespace-normal rounded bg-gray-800 text-white"
     >
-      {{ playlist.description }}
+      {{ getDescription() }}
     </div>
     <div @click="goTo">
       <img
@@ -99,6 +100,17 @@ const getOwnerName = () => {
     return playlist.owner.display_name.substring(0, 13) + "...";
   } else {
     return playlist.owner.display_name;
+  }
+};
+const getDescription = () => {
+  console.log(playlist);
+  if (!playlist.description) {
+    return "No description";
+  }
+  if (playlist.description.length > 100) {
+    return playlist.description.substring(0, 97) + "...";
+  } else {
+    return playlist.description;
   }
 };
 </script>
