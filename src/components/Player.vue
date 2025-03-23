@@ -7,15 +7,17 @@
     >
       {{ alert.message }}
     </div>
-    <audio
-      class="hidden fixed bottom-0 left-0 z-20 rounded-none bg-black"
-      controls
-      loop
-      id="audioPlayer"
-      :src="chanson.preview_url"
-    >
-      Your browser does not support the audio element.
-    </audio>
+    <div>
+      <audio
+        class="hidden fixed bottom-0 left-0 z-20 rounded-none bg-black"
+        controls
+        loop
+        id="audioPlayer"
+        :src="getPreviewSrc()"
+      >
+        Your browser does not support the audio element.
+      </audio>
+    </div>
     <!--current song-->
     <div class="flex text-white w-1/4">
       <img
@@ -253,7 +255,10 @@ const pause = () => {
 };
 onMounted(() => {
   onEvent("setChansonEnCours", async (obj) => {
-    if (obj.song.preview_url == null) {
+    if (obj.song == undefined) {
+      return;
+    }
+    if (obj.song != undefined && obj.song.preview_url == null) {
       alert.value.bool = true;
       alert.value.message = obj.song.name + " n'est pas disponible en preview";
       setTimeout(() => {
@@ -343,5 +348,11 @@ const hoverProgress = (e) => {
   const x = e.clientX - bounding.left;
   const percentage = (x / bounding.width) * 100;
   details.value.percentagePlayed = percentage;
+};
+const getPreviewSrc = () => {
+  if (chanson.value.preview_url == null) {
+    return "https://i.scdn.co/image/ab67616d0000b273df4862f641044c61c4abe602";
+  }
+  return chanson.value.preview_url;
 };
 </script>
