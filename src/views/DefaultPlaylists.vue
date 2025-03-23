@@ -22,8 +22,8 @@
     <div class="flex text-white flex-wrap w-full truncate">
       <PlayListElement
         class=""
-        v-for="playlist in playlistsTab"
-        :key="playlist.id"
+        v-for="(playlist, i) in playlistsTab"
+        :key="i"
         :playlist="playlist"
       />
     </div>
