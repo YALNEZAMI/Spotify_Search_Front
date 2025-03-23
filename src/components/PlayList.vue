@@ -103,7 +103,6 @@ const getOwnerName = () => {
   }
 };
 const getDescription = () => {
-  console.log(playlist);
   if (!playlist.description) {
     return "No description";
   }

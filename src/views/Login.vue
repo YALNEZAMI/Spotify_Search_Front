@@ -192,7 +192,6 @@ async function loginWithoutAccount() {
   connectingWithoutAccount.value = true;
   //make time symbol move
   const ts = document.getElementById("timeSymbol");
-  console.log("ts", ts);
   const interval = setInterval(() => {
     ts.classList.toggle("rotate-time");
   }, 1000);

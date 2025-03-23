@@ -275,7 +275,6 @@ onMounted(() => {
     }
     // const saved = await store.dispatch("isSaved", chanson.value);
     // details.value.saved = saved;
-    // console.log("saved", saved);
   });
   //playing  stuff
   const audio = document.getElementById("audioPlayer");
@@ -340,7 +339,6 @@ const changeProgress = (e) => {
 const saveSong = async () => {
   details.value.saved = true;
   const saving = await store.dispatch("saveSong", chanson.value);
-  console.log("saving", saving);
 };
 const hoverProgress = (e) => {
   const bar = e.target;

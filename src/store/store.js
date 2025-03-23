@@ -144,7 +144,6 @@ export const store = createStore({
           },
         }
       );
-      console.log("res", res);
 
       const items = res.data.tracks.items;
       //set the first song to be played in the store
@@ -155,7 +154,6 @@ export const store = createStore({
 
       //set laUne to a random song
       const randomItem = items[Math.floor(Math.random() * items.length)];
-      console.log("randomItem", randomItem);
 
       const laUne = {
         preview_url: randomItem.preview_url,
