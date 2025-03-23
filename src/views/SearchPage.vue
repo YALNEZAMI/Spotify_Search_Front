@@ -1,30 +1,32 @@
 <template>
   <main class="bg-black min-h-screen h-full p-1">
-    <div class="fixed top-0 right-1 w-3/4 z-20 bg-black p-2">
-      <!--search bar component div-->
-      <div class="flex justify-center">
-        <SearchInputElement @search="search" class="w-3/4" />
-      </div>
-      <!--navigation bar-->
-      <div class="nav text-white mt-1 flex flex-wrap justify-center">
-        <!--items de la barre de navigation-->
-        <span
-          @click="navigateTo(item.name)"
-          v-for="item in items"
-          :key="item.name"
-          :class="{
-            'm-1 sm:my-2 p-1 cursor-pointer px-2 bg-gray-800 border-2 rounded-3xl border-white ': true,
-            'bg-white text-black border-2 rounded-3xl border-white':
-              item.name === selectedItem,
-            'hover:bg-white hover:text-black hover:border-2 hover:border-white':
-              item.name !== selectedItem,
-          }"
-          >{{ item.name }}</span
-        >
+    <div class="w-full z-20 bg-black p-2 flex justify-center">
+      <div class="w-3/4">
+        <!--search bar component div-->
+        <div class="flex justify-center">
+          <SearchInputElement @search="search" class="w-full" />
+        </div>
+        <!--navigation bar-->
+        <div class="nav text-white mt-1 flex flex-wrap justify-center">
+          <!--items de la barre de navigation-->
+          <span
+            @click="navigateTo(item.name)"
+            v-for="item in items"
+            :key="item.name"
+            :class="{
+              'm-1 sm:my-2 p-1 cursor-pointer px-2 bg-gray-800 border-2 rounded-3xl border-white ': true,
+              'bg-white text-black border-2 rounded-3xl border-white':
+                item.name === selectedItem,
+              'hover:bg-white hover:text-black hover:border-2 hover:border-white':
+                item.name !== selectedItem,
+            }"
+            >{{ item.name }}</span
+          >
+        </div>
       </div>
     </div>
     <!--main content-->
-    <div class="w-full mt-24">
+    <div class="w-full">
       <div class="w-full h-full bg-black pt-2">
         <!--nom de l'entité à afficher-->
         <h1 class="text-white hover:text-gray-200 pl-2">{{ selectedItem }}</h1>
@@ -32,7 +34,8 @@
         <!--chansons component-->
         <div
           v-show="selectedItem == 'Chansons' || selectedItem == 'Tout'"
-          class="flex sm:pr-18 text-white flex-wrap py-3 px-1 border-b-2 border-white"
+          class="flex overflow-y-auto sm:pr-18 text-white flex-wrap py-3 px-1 border-b-2 border-white"
+          style="max-height: 70vh"
         >
           <ChansonElement
             v-for="chanson in store.state.searchedChansons"
@@ -43,7 +46,8 @@
 
         <div
           v-show="selectedItem == 'Albums' || selectedItem == 'Tout'"
-          class="flex sm:pr-18 text-white flex-wrap py-3 border-b-2 border-white"
+          class="flex overflow-y-auto sm:pr-18 text-white flex-wrap py-3 border-b-2 border-white"
+          style="max-height: 70vh"
         >
           <!--albums component-->
           <AlbumElement
@@ -54,8 +58,9 @@
         </div>
 
         <div
-          class="flex pr-18 text-white flex-wrap py-3 border-b-2 border-white"
+          class="flex overflow-y-auto pr-18 text-white flex-wrap py-3 border-b-2 border-white"
           v-show="selectedItem == 'Artists' || selectedItem == 'Tout'"
+          style="max-height: 70vh"
         >
           <!--artists component-->
           <ArtistElement
@@ -67,7 +72,8 @@
 
         <div
           v-show="selectedItem == 'Playlists' || selectedItem == 'Tout'"
-          class="flex pr-18 text-white flex-wrap py-3 border-b-2 border-white"
+          class="flex overflow-y-auto pr-18 text-white flex-wrap py-3 border-b-2 border-white"
+          style="max-height: 70vh"
         >
           <!--playlists component-->
           <PlayListElement
@@ -95,7 +101,6 @@ import { ref } from "vue";
 const store = useStore();
 const router = useRouter();
 let items = [
-  { name: "Tout" },
   { name: "Chansons" },
   { name: "Albums" },
   { name: "Artists" },
