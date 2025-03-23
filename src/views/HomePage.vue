@@ -77,7 +77,9 @@
         <!--trunicate user name tool tip -->
         <span
           class="userNameToolTip text-xs hidden text-white bg-gray-700 max-w-20 truncate"
-          >{{ store.state.profile.display_name }}</span
+          >{{
+            store.state.profile ? store.state.profile.display_name : ""
+          }}</span
         >
       </div>
     </div>
@@ -127,8 +129,8 @@
           <PlayListElement
             v-show="item.name === 'playlists'"
             class=""
-            v-for="playlist in playlistsTab"
-            :key="playlist.id"
+            v-for="(playlist, i) in playlistsTab"
+            :key="i"
             :playlist="playlist"
           />
         </div>
